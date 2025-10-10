@@ -16,6 +16,13 @@ func _enter_tree() -> void:
 func _process(delta: float) -> void:
 	if(cdp == null):
 		return
+	
+	if(Input.is_action_just_pressed("enter")):
+		if(cdp.all_text_showed and cdp.current_text.enable_skip):
+			next_text()
+			return
+		if(cdp.current_text.can_skip_write):
+			show_complete_text()
 
 func start_dialogue(dialogue : Dialogue) -> void:
 	if(cdp != null):
@@ -47,6 +54,8 @@ func start_dialogue(dialogue : Dialogue) -> void:
 
 func end_dialogue() -> void:
 	remove_ui(cdp.dialogue_box)
+	cdp.next_letter_timer.queue_free()
+	cdp.next_text_timer.queue_free()
 	cdp = null
 	DialogueGlobalEmitter.has_ended.emit()
 
@@ -56,6 +65,11 @@ func next_text() -> void:
 		cdp.next_text_timer.timeout.disconnect(next_text)
 	if(cdp.next_letter_timer.timeout.is_connected(next_letter)):
 		cdp.next_letter_timer.timeout.disconnect(next_letter)
+	
+	if(!cdp.next_letter_timer.is_stopped()):
+		cdp.next_letter_timer.stop()
+	if(!cdp.next_text_timer.is_stopped()):
+		cdp.next_text_timer.stop()
 	
 	cdp.current_text_count+=1
 	
@@ -70,13 +84,20 @@ func next_text() -> void:
 		cdp.next_letter_timer.timeout.connect(next_letter)
 		pass
 	else:
-		cdp.next_text_timer.start()
+		show_complete_text()
+	
+	if(cdp.current_text.can_auto_skip):
+		cdp.next_text_timer.wait_time = new_text.skip_time
 		cdp.next_text_timer.timeout.connect(next_text)
-		cdp.dialogue_box.set_text(new_text.content)
-		
+		cdp.next_text_timer.start()
+	
 
 func next_letter() -> void:
 	pass
+
+func show_complete_text() -> void:
+	cdp.dialogue_box.set_text(cdp.current_text.content)
+	cdp.all_text_showed = true
 
 func force_end_dialogue() -> void:
 	pass

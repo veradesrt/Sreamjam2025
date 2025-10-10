@@ -8,7 +8,8 @@ enum Mode{BASIC}
 
 @export_group("Skip")
 @export var enable_skip : bool = true
-@export var finish_time : float = 1.0
+@export var can_auto_skip : bool = false
+@export var skip_time : float = 2.0
 
 @export_group("Typewrite")
 @export var enable_typewrite : bool = true
