@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Dialogue" load_steps=8 format=3 uid="uid://b7pcjhuuijv50"]
+[gd_resource type="Resource" script_class="Dialogue" load_steps=13 format=3 uid="uid://b7pcjhuuijv50"]
 
 [ext_resource type="Script" uid="uid://jepaqxoulkry" path="res://scripts/dialogue/text/Text.gd" id="1_kp2jl"]
 [ext_resource type="Script" uid="uid://d6yrcdl51eli" path="res://scripts/dialogue/dialogue/Dialogue.gd" id="2_utn4e"]
@@ -33,10 +33,46 @@ metadata/_custom_type_script = "uid://jepaqxoulkry"
 [sub_resource type="Resource" id="Resource_fv06a"]
 script = ExtResource("1_kp2jl")
 content = "this text draws on time"
+typewrite_speed = 0.01
 can_skip_write = false
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_fao54"]
+script = ExtResource("1_kp2jl")
+content = "oh look! you found a ... [color=gold]Legendary Sword![/color]"
+typewrite_speed = 0.03
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_5x06i"]
+script = ExtResource("1_kp2jl")
+content = "That's great, now you can use that power to unleash the ene"
+enable_skip = false
+can_auto_skip = true
+skip_time = 0.05
+typewrite_speed = 0.02
+can_skip_write = false
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_twes6"]
+script = ExtResource("1_kp2jl")
+content = "[color=red]GIVE ME YOUR SOUL NOW GIVE ME YOUR SOUL NOW GIVE ME YOUR SOUL NOW GIVE ME YOUR SOUL NOW GIVE ME YOUR SOUL NOW GIVE ME YOUR SOUL NOW GIVE ME YOUR SOUL NOW [/color]"
+typewrite_speed = 0.004
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_vqaoa"]
+script = ExtResource("1_kp2jl")
+content = "..."
+typewrite_speed = 0.08
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_im0dv"]
+script = ExtResource("1_kp2jl")
+content = "ok that was weird"
+can_auto_skip = true
+typewrite_speed = 0.01
 metadata/_custom_type_script = "uid://jepaqxoulkry"
 
 [resource]
 script = ExtResource("2_utn4e")
-dialogue = Array[ExtResource("1_kp2jl")]([SubResource("Resource_ur1bt"), SubResource("Resource_kp2jl"), SubResource("Resource_utn4e"), SubResource("Resource_mtxsd"), SubResource("Resource_fv06a")])
+dialogue = Array[ExtResource("1_kp2jl")]([SubResource("Resource_ur1bt"), SubResource("Resource_kp2jl"), SubResource("Resource_utn4e"), SubResource("Resource_mtxsd"), SubResource("Resource_fv06a"), SubResource("Resource_fao54"), SubResource("Resource_5x06i"), SubResource("Resource_twes6"), SubResource("Resource_vqaoa"), SubResource("Resource_im0dv")])
 metadata/_custom_type_script = "uid://d6yrcdl51eli"

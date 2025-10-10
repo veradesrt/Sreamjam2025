@@ -23,6 +23,11 @@ func _process(delta: float) -> void:
 			return
 		elif(cdp.current_text.can_skip_write):
 			show_complete_text()
+	
+	if(cdp.current_text.enable_typewrite and cdp.all_text_showed == false):
+		cdp.tick_letter_count += delta
+		if(cdp.tick_letter_count > cdp.current_text.typewrite_speed):
+			next_letter()
 
 func start_dialogue(dialogue : Dialogue) -> void:
 	if(cdp != null):
@@ -43,33 +48,25 @@ func start_dialogue(dialogue : Dialogue) -> void:
 	cdp.dialogue_length = cdp.dialogue.dialogue.size()-1
 	
 	var ntt : Timer = Timer.new()
-	var nlt : Timer = Timer.new()
-	nlt.one_shot = true
-	
 	add_child(ntt)
-	add_child(nlt)
 	cdp.next_text_timer = ntt
-	cdp.next_letter_timer = nlt
 	
 	DialogueGlobalEmitter.has_started.emit()
 	next_text()
 
 func end_dialogue() -> void:
 	remove_ui(cdp.dialogue_box)
-	cdp.next_letter_timer.queue_free()
 	cdp.next_text_timer.queue_free()
 	cdp = null
 	DialogueGlobalEmitter.has_ended.emit()
 
 func next_text() -> void:
 	
+	cdp.all_text_showed = false
+	
 	if(cdp.next_text_timer.timeout.is_connected(next_text)):
 		cdp.next_text_timer.timeout.disconnect(next_text)
-	if(cdp.next_letter_timer.timeout.is_connected(next_letter)):
-		cdp.next_letter_timer.timeout.disconnect(next_letter)
-	
-	if(!cdp.next_letter_timer.is_stopped()):
-		cdp.next_letter_timer.stop()
+
 	if(!cdp.next_text_timer.is_stopped()):
 		cdp.next_text_timer.stop()
 	
@@ -86,30 +83,36 @@ func next_text() -> void:
 	cdp.next_text_timer.timeout.connect(next_text)
 	
 	if(new_text.enable_typewrite):
-		cdp.next_letter_timer.timeout.connect(next_letter)
-		cdp.next_letter_timer.wait_time = cdp.current_text.speed
 		next_letter()
 	else:
 		finish_text()
 	
 
 func next_letter() -> void:
-	cdp.current_letter_count+=1
+	cdp.current_letter_count += cdp.current_text.letters_per_write
+	cdp.tick_letter_count -= cdp.current_text.typewrite_speed
 	var content : String = cdp.current_text.content
+	
+	if(cdp.current_letter_count == 0):
+		cdp.tick_letter_count = 0
 	
 	if(cdp.current_letter_count > content.length() -1):
 		finish_text()
+		cdp.tick_letter_count = 0
+		cdp.current_letter_count = -1
 		return
 	
 	if(content[cdp.current_letter_count] == "["):
-		for i in content.length() - cdp.current_letter_count:
+		for i in content.length():
 			cdp.current_letter_count+=1
 			if(content[cdp.current_letter_count] == "]"):
+				cdp.current_letter_count+=1
 				break
+	
+	cdp.current_letter_count = clamp(cdp.current_letter_count,0,content.length())
 	
 	var new_content : String = content.substr(0,cdp.current_letter_count)
 	cdp.dialogue_box.set_text(new_content)
-	cdp.next_letter_timer.start()
 
 func finish_text() -> void:
 	show_complete_text()
