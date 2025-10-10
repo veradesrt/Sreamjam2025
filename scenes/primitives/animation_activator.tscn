@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfy0h005oqoas"]
+
+[ext_resource type="Script" uid="uid://ceqiscuri26vf" path="res://scenes/primitives/animation_activator.gd" id="1_solsp"]
+
+[node name="animation_activator" type="Node3D"]
+script = ExtResource("1_solsp")
+
+[node name="readme" type="Node" parent="."]
+editor_description = "Use this to link a trigger to an animation player.
+Add animation player and link it to the export.
+add trigger, set trigger limit and link it to the export.
+profit"
