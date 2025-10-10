@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnfsnsa4jpflw"]
+[gd_scene load_steps=4 format=3 uid="uid://cnfsnsa4jpflw"]
 
 [ext_resource type="Script" uid="uid://d3hlwdvl8omef" path="res://scenes/dialogue/dialogue_test_scene.gd" id="1_4df8l"]
 [ext_resource type="Script" uid="uid://ya240urtqqhp" path="res://scripts/dialogue/dialogue/DialogueNode.gd" id="2_4df8l"]
+[ext_resource type="Resource" uid="uid://b7pcjhuuijv50" path="res://resources/dialogue/example.tres" id="2_6htog"]
 
 [node name="Node2D" type="CanvasLayer"]
 script = ExtResource("1_4df8l")
+dialogue = ExtResource("2_6htog")
 
 [node name="DialogueNode" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 script = ExtResource("2_4df8l")
 metadata/_custom_type_script = "uid://ya240urtqqhp"

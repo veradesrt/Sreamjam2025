@@ -1,7 +1,7 @@
 extends Node
 
-signal start_dialog(dialogue : Dialogue, )
-signal force_end_dialog
+signal start_dialogue(dialogue : Dialogue, )
+signal force_end_dialogue
 
 signal has_started
 signal has_ended

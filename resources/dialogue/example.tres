@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Dialogue" load_steps=4 format=3 uid="uid://b7pcjhuuijv50"]
+[gd_resource type="Resource" script_class="Dialogue" load_steps=5 format=3 uid="uid://b7pcjhuuijv50"]
 
 [ext_resource type="Script" uid="uid://jepaqxoulkry" path="res://scripts/dialogue/text/Text.gd" id="1_kp2jl"]
 [ext_resource type="Script" uid="uid://d6yrcdl51eli" path="res://scripts/dialogue/dialogue/Dialogue.gd" id="2_utn4e"]
@@ -6,9 +6,16 @@
 [sub_resource type="Resource" id="Resource_ur1bt"]
 script = ExtResource("1_kp2jl")
 content = "Hello, World!"
+enable_typewrite = false
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_kp2jl"]
+script = ExtResource("1_kp2jl")
+content = "ytoooooo"
+enable_typewrite = false
 metadata/_custom_type_script = "uid://jepaqxoulkry"
 
 [resource]
 script = ExtResource("2_utn4e")
-dialogue = Array[ExtResource("1_kp2jl")]([SubResource("Resource_ur1bt")])
+dialogue = Array[ExtResource("1_kp2jl")]([SubResource("Resource_ur1bt"), SubResource("Resource_kp2jl")])
 metadata/_custom_type_script = "uid://d6yrcdl51eli"
