@@ -14,11 +14,15 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("escape"):
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if event is InputEventMouseMotion && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(event.relative.x * -1 *mouse_sens)
 		head.rotate_x(event.relative.y * -1 *mouse_sens)
 		head.rotation.x = clamp(head.rotation.x ,deg_to_rad(-90),deg_to_rad(90))
-
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -29,8 +33,6 @@ func _physics_process(delta: float) -> void:
 	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 	#	velocity.y = JUMP_VELOCITY
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:

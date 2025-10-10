@@ -16,5 +16,8 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_body_entered(body: Node3D) -> void:
-	print(body)
-	emit_signal("player_entered")
+	if body.is_in_group("player") :
+		if trigger_counter < trigger_limit:
+			print(body)
+			emit_signal("player_entered")
+			trigger_counter +=1

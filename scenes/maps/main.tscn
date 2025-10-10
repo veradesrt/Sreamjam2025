@@ -31,11 +31,11 @@ environment = SubResource("Environment_6hyye")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." groups=["concrete"]]
+[node name="concrete_ground" type="CSGBox3D" parent="." groups=["concrete"]]
 use_collision = true
 size = Vector3(20, 1, 20)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="." groups=["dirt"]]
+[node name="dirt_ground" type="CSGBox3D" parent="." groups=["dirt"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
 use_collision = true
 size = Vector3(20, 1, 20)
