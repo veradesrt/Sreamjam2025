@@ -1,9 +1,16 @@
 class_name Text
 extends Resource
 
-@export_multiline var content : String
+enum Mode{BASIC}
 
-@export_group("Options")
+@export_multiline var content : String
+@export var centered : bool = true
+
+@export_group("Skip")
+@export var enable_skip : bool = true
+@export var finish_time : float = 1.0
+
+@export_group("Typewrite")
+@export var enable_typewrite : bool = true
 @export var speed : float = 1.0
-@export var can_skip : bool = true
-@export var can_skip_outline : bool = false
+@export var can_skip_write : bool = true

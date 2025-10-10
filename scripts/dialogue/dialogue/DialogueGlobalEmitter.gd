@@ -5,3 +5,4 @@ signal force_end_dialog
 
 signal has_started
 signal has_ended
+signal already_running
