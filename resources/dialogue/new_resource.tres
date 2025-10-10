@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Text" load_steps=2 format=3 uid="uid://cln026xkmaygd"]
+
+[ext_resource type="Script" uid="uid://jepaqxoulkry" path="res://scripts/dialogue/Text.gd" id="1_3cbev"]
+
+[resource]
+script = ExtResource("1_3cbev")
+content = "Hello, World!"
+metadata/_custom_type_script = "uid://jepaqxoulkry"
