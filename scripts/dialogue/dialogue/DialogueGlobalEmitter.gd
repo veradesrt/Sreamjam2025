@@ -2,6 +2,7 @@ extends Node
 
 signal start_dialogue(dialogue : Dialogue, )
 signal force_end_dialogue
+signal force_end_conversation
 signal already_running
 
 signal has_started

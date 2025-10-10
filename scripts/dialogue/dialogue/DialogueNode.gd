@@ -4,12 +4,16 @@ extends Control
 const DIALOGUE_BASIC_SCENE : PackedScene = preload("uid://gt614lqfnysu")
 
 #current_dialogue_process
+
+var dp_queue : Array[DialogueProcess]
+
 var cdp : DialogueProcess
 
 
 func _enter_tree() -> void:
 	DialogueGlobalEmitter.start_dialogue.connect(start_dialogue)
-	DialogueGlobalEmitter.force_end_dialogue.connect(end_dialogue)
+	DialogueGlobalEmitter.force_end_conversation.connect(end_dialogue)
+	#DialogueGlobalEmitter.force_end_dialogue
 	mouse_filter = MouseFilter.MOUSE_FILTER_IGNORE
 	anchors_preset = Control.PRESET_FULL_RECT
 
@@ -30,35 +34,50 @@ func _process(delta: float) -> void:
 			next_letter()
 
 func start_dialogue(dialogue : Dialogue) -> void:
-	if(cdp != null):
-		DialogueGlobalEmitter.already_running.emit()
-		printerr("already running a dialogue")
-		return
 	
-	cdp = DialogueProcess.new()
-	cdp.dialogue = dialogue
+	if(dp_queue.is_empty()):
+		dp_queue.append(create_dialogue_process(dialogue))
+		next_dialogue()
+	else:
+		dp_queue.append(create_dialogue_process(dialogue))
 	
-	match(dialogue.mode):
-		Dialogue.Mode.BASIC:
-			cdp.dialogue_box = DIALOGUE_BASIC_SCENE.instantiate() as BasicBoxUI
-		_:
-			printerr("not let the default one triggers lol")
 	
-	add_ui(cdp.dialogue_box)
-	cdp.dialogue_length = cdp.dialogue.dialogue.size()-1
-	
-	var ntt : Timer = Timer.new()
-	add_child(ntt)
-	cdp.next_text_timer = ntt
-	
-	DialogueGlobalEmitter.has_started.emit()
-	next_text()
+		#DialogueGlobalEmitter.already_running.emit()
+		#dp_queue.append(create_dialogue_process(dialogue))
+		#printerr("already running a dialogue, added to queue")
+		#return
 
 func end_dialogue() -> void:
 	remove_ui(cdp.dialogue_box)
 	cdp.next_text_timer.queue_free()
 	cdp = null
 	DialogueGlobalEmitter.has_ended.emit()
+	dp_queue.pop_front()
+	
+	if(!dp_queue.is_empty()):
+		next_dialogue()
+
+func force_end_conversation() -> void:
+	pass
+
+func create_dialogue_process(dialogue : Dialogue) -> DialogueProcess:
+	var dp = DialogueProcess.new()
+	dp.dialogue = dialogue
+	dp.dialogue_length = dp.dialogue.dialogue.size()-1
+	
+	match(dialogue.mode):
+		Dialogue.Mode.BASIC:
+			dp.dialogue_box = DIALOGUE_BASIC_SCENE.instantiate() as BasicBoxUI
+		_:
+			printerr("not let the default one triggers lol")
+	
+	return dp
+
+func next_dialogue() -> void:
+	cdp = dp_queue.front()
+	instantiate_nodes(cdp)
+	DialogueGlobalEmitter.has_started.emit()
+	next_text()
 
 func next_text() -> void:
 	
@@ -122,6 +141,12 @@ func finish_text() -> void:
 func show_complete_text() -> void:
 	cdp.dialogue_box.set_text(cdp.current_text.content)
 	cdp.all_text_showed = true
+
+func instantiate_nodes(dp : DialogueProcess) -> void:
+	add_ui(dp.dialogue_box)
+	var ntt : Timer = Timer.new()
+	add_child(ntt)
+	cdp.next_text_timer = ntt
 
 func add_ui(box : DialogueBoxUI) -> void:
 	add_child(box)

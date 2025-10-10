@@ -4,5 +4,6 @@ extends CanvasLayer
 
 func _ready() -> void:
 	DialogueGlobalEmitter.start_dialogue.emit(dialogue)
+	DialogueGlobalEmitter.start_dialogue.emit(dialogue)
 	pass
 	
