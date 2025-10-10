@@ -13,5 +13,5 @@ enum Mode{BASIC}
 
 @export_group("Typewrite")
 @export var enable_typewrite : bool = true
-@export var speed : float = 1.0
+@export var speed : float = 0.1
 @export var can_skip_write : bool = true
