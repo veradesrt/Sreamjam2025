@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://gt614lqfnysu"]
 
-[ext_resource type="Script" uid="uid://ci34fvvkkp3ql" path="res://scripts/dialogue/ui/TextBox.gd" id="1_qrb5j"]
+[ext_resource type="Script" uid="uid://cen5o2idqbeg2" path="res://scripts/dialogue/ui/BasicBoxUI.gd" id="1_cqlfr"]
 
 [node name="TextSection" type="Control" node_paths=PackedStringArray("label")]
 layout_mode = 3
@@ -11,7 +11,7 @@ offset_top = -67.104004
 offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 0
-script = ExtResource("1_qrb5j")
+script = ExtResource("1_cqlfr")
 label = NodePath("CenterContainer/PanelContainer/MarginContainer/Label")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
