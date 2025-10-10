@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://c78bdq77ygnhk"]
+
+[ext_resource type="PackedScene" uid="uid://e54q0xwbfuo8" path="res://scenes/player/player.tscn" id="1_8wxmh"]
+[ext_resource type="PackedScene" uid="uid://bg7qt4fnwttvq" path="res://scenes/primitives/trigger.tscn" id="2_pwihf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8wxmh"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_pwihf"]
+sky_material = SubResource("ProceduralSkyMaterial_8wxmh")
+
+[sub_resource type="Environment" id="Environment_6hyye"]
+background_mode = 2
+sky = SubResource("Sky_pwihf")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8wxmh"]
+albedo_color = Color(0.32941177, 0.1764706, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6hyye"]
+size = Vector3(5, 5, 5)
+
+[node name="main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6hyye")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." groups=["concrete"]]
+use_collision = true
+size = Vector3(20, 1, 20)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." groups=["dirt"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+use_collision = true
+size = Vector3(20, 1, 20)
+material = SubResource("StandardMaterial3D_8wxmh")
+
+[node name="player" parent="." instance=ExtResource("1_8wxmh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6280951, 0)
+
+[node name="trigger" parent="." instance=ExtResource("2_pwihf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5389414, 3.019484, 0)
+
+[node name="CollisionShape3D" parent="trigger" index="0"]
+shape = SubResource("BoxShape3D_6hyye")
+
+[editable path="trigger"]
