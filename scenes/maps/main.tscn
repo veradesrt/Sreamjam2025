@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://c78bdq77ygnhk"]
+[gd_scene load_steps=10 format=3 uid="uid://c78bdq77ygnhk"]
 
 [ext_resource type="PackedScene" uid="uid://e54q0xwbfuo8" path="res://scenes/player/player.tscn" id="1_8wxmh"]
 [ext_resource type="PackedScene" uid="uid://bg7qt4fnwttvq" path="res://scenes/primitives/trigger.tscn" id="2_pwihf"]
+[ext_resource type="PackedScene" uid="uid://kutieyc8oj64" path="res://scenes/primitives/dialogue_emitter_3d.tscn" id="3_gx8es"]
+[ext_resource type="Resource" uid="uid://b7pcjhuuijv50" path="res://resources/dialogue/example.tres" id="4_2avkh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8wxmh"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -44,10 +46,15 @@ material = SubResource("StandardMaterial3D_8wxmh")
 [node name="player" parent="." instance=ExtResource("1_8wxmh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.516809, 2.1821399, 0)
 
-[node name="trigger" parent="." instance=ExtResource("2_pwihf")]
+[node name="dialogue_emitter_3d" parent="." instance=ExtResource("3_gx8es")]
+dialogue = ExtResource("4_2avkh")
+
+[node name="trigger" parent="dialogue_emitter_3d" instance=ExtResource("2_pwihf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5389414, 3.019484, 0)
 
-[node name="CollisionShape3D" parent="trigger" index="0"]
+[node name="CollisionShape3D" parent="dialogue_emitter_3d/trigger" index="0"]
 shape = SubResource("BoxShape3D_6hyye")
 
-[editable path="trigger"]
+[connection signal="player_entered" from="dialogue_emitter_3d/trigger" to="dialogue_emitter_3d" method="start_dialogue"]
+
+[editable path="dialogue_emitter_3d/trigger"]

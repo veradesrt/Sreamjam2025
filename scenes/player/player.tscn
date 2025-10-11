@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://e54q0xwbfuo8"]
+[gd_scene load_steps=6 format=3 uid="uid://e54q0xwbfuo8"]
 
 [ext_resource type="Script" uid="uid://c5os2fgtf1upq" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="Script" uid="uid://cg2wippfghjib" path="res://scenes/player/main_menu.gd" id="2_dovo2"]
+[ext_resource type="Script" uid="uid://ya240urtqqhp" path="res://scripts/dialogue/dialogue/DialogueNode.gd" id="3_gmlin"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dovo2"]
 
@@ -85,22 +86,16 @@ text = "Options"
 layout_mode = 2
 text = "To main menu"
 
-[node name="dialogue_container" type="Control" parent="UI"]
-layout_mode = 1
-anchor_top = 0.712963
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="Panel" type="Panel" parent="UI/dialogue_container"]
+[node name="DialogueNode" type="Control" parent="UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_gmlin")
+metadata/_custom_type_script = "uid://ya240urtqqhp"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_dovo2")

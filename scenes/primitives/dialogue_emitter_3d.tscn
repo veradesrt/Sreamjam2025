@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://kutieyc8oj64"]
+
+[ext_resource type="Script" uid="uid://dxtlwx2f15ra1" path="res://scenes/primitives/dialogue_emitter_3d.gd" id="1_uogjo"]
+
+[node name="dialogue_emitter_3d" type="Node3D"]
+script = ExtResource("1_uogjo")

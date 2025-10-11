@@ -1,7 +1,7 @@
 extends Control
 
 @onready var menu_container: Panel = $menu_container
-@onready var dialogue_container: Control = $dialogue_container
+@onready var dialogue_container: Control = $DialogueNode
 
 @onready var player: Player = $".."
 
@@ -31,7 +31,7 @@ func close_dialogue():
 
 func close_all():
 	menu_container.visible = false
-	dialogue_container.visible = false
+	#dialogue_container.visible = false
 	player.change_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _on_resume_pressed() -> void:
