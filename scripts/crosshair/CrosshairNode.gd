@@ -10,7 +10,7 @@ enum CrosshairMode{TEXTURE,COLOR}
 @export var interactable_detector_reference : InteractDetector
 @export var crosshair_mode : CrosshairMode = CrosshairMode.COLOR
 
-##TODO: seguir implementandole el resto despues B)
+##TODO: seguir implementando el modo textura despues wacho
 
 func _ready() -> void:
 	interactable_detector_reference.is_touching.connect(is_interacting)
