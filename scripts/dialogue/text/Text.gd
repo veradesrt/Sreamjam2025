@@ -5,6 +5,7 @@ enum Mode{BASIC}
 
 @export_multiline var content : String
 @export var centered : bool = true
+@export var initial_letter : int = 0
 
 @export_group("Skip")
 @export var enable_skip : bool = true

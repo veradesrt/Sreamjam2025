@@ -3,6 +3,9 @@ extends Control
 
 const DIALOGUE_BASIC_SCENE : PackedScene = preload("uid://gt614lqfnysu")
 
+enum HierarchyMode {REPLACE, QUEUE_FRONT}
+@export var hierarchy_mode : HierarchyMode = HierarchyMode.REPLACE
+
 #current_dialogue_process
 
 var dp_queue : Array[DialogueProcess]
@@ -34,27 +37,33 @@ func _process(delta: float) -> void:
 
 func start_dialogue(dialogue : Dialogue) -> void:
 	
-	if(dp_queue.is_empty()):
-		dp_queue.append(create_dialogue_process(dialogue))
-		next_dialogue()
-	else:
-		dp_queue.append(create_dialogue_process(dialogue))
-	
-	
-		#DialogueGlobalEmitter.already_running.emit()
-		#dp_queue.append(create_dialogue_process(dialogue))
-		#printerr("already running a dialogue, added to queue")
-		#return
+	match(hierarchy_mode):
+		HierarchyMode.REPLACE:
+			end_dialogue()
+			cdp = create_dialogue_process(dialogue)
+			next_dialogue()
+		HierarchyMode.QUEUE_FRONT:
+			if(dp_queue.is_empty()):
+				dp_queue.append(create_dialogue_process(dialogue))
+				next_dialogue()
+			else:
+				dp_queue.append(create_dialogue_process(dialogue))
 
 func end_dialogue() -> void:
+	
+	if(cdp == null):
+		return
+	
 	remove_ui(cdp.dialogue_box)
 	cdp.next_text_timer.queue_free()
 	cdp = null
 	DialogueGlobalEmitter.has_ended.emit()
-	dp_queue.pop_front()
 	
-	if(!dp_queue.is_empty()):
-		next_dialogue()
+	match(hierarchy_mode):
+		HierarchyMode.QUEUE_FRONT:
+			dp_queue.pop_front()
+			if(!dp_queue.is_empty()):
+				next_dialogue()
 
 func force_end_conversation() -> void:
 	pass
@@ -63,6 +72,8 @@ func create_dialogue_process(dialogue : Dialogue) -> DialogueProcess:
 	var dp = DialogueProcess.new()
 	dp.dialogue = dialogue
 	dp.dialogue_length = dp.dialogue.dialogue.size()-1
+	
+
 	
 	match(dialogue.mode):
 		Dialogue.Mode.BASIC:
@@ -73,7 +84,9 @@ func create_dialogue_process(dialogue : Dialogue) -> DialogueProcess:
 	return dp
 
 func next_dialogue() -> void:
-	cdp = dp_queue.front()
+	match(hierarchy_mode):
+		HierarchyMode.QUEUE_FRONT:
+			cdp = dp_queue.front()
 	instantiate_nodes(cdp)
 	DialogueGlobalEmitter.has_started.emit()
 	next_text()
@@ -88,7 +101,7 @@ func next_text() -> void:
 	if(!cdp.next_text_timer.is_stopped()):
 		cdp.next_text_timer.stop()
 	
-	cdp.current_text_count+=1
+	cdp.current_text_count+= 1
 	
 	if(cdp.current_text_count > cdp.dialogue_length):
 		end_dialogue()
@@ -96,6 +109,7 @@ func next_text() -> void:
 	
 	var new_text : Text = cdp.dialogue.dialogue[cdp.current_text_count]
 	cdp.current_text = new_text
+	cdp.current_letter_count += new_text.initial_letter
 	
 	cdp.next_text_timer.wait_time = cdp.current_text.skip_time
 	cdp.next_text_timer.timeout.connect(next_text)

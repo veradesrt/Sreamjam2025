@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c78bdq77ygnhk"]
+[gd_scene load_steps=13 format=3 uid="uid://c78bdq77ygnhk"]
 
-[ext_resource type="PackedScene" uid="uid://e54q0xwbfuo8" path="res://scenes/player/player.tscn" id="1_8wxmh"]
+[ext_resource type="PackedScene" uid="uid://bidwu6pvfcasl" path="res://scenes/player/player.tscn" id="1_8wxmh"]
 [ext_resource type="PackedScene" uid="uid://bg7qt4fnwttvq" path="res://scenes/primitives/trigger.tscn" id="2_pwihf"]
-[ext_resource type="PackedScene" uid="uid://kutieyc8oj64" path="res://scenes/primitives/dialogue_emitter_3d.tscn" id="3_gx8es"]
-[ext_resource type="Resource" uid="uid://b7pcjhuuijv50" path="res://resources/dialogue/example.tres" id="4_2avkh"]
 [ext_resource type="Script" uid="uid://5vol0c1sctto" path="res://scripts/interactable/InteractableNode.gd" id="3_6hyye"]
-
+[ext_resource type="PackedScene" path="res://scenes/primitives/dialogue_emitter_3d.tscn" id="3_gx8es"]
+[ext_resource type="Resource" uid="uid://b7pcjhuuijv50" path="res://resources/dialogue/example.tres" id="4_2avkh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8wxmh"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -76,7 +75,6 @@ metadata/_custom_type_script = "uid://5vol0c1sctto"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0014953613)
 shape = SubResource("BoxShape3D_2avkh")
 
-[editable path="trigger"]
 [connection signal="player_entered" from="dialogue_emitter_3d/trigger" to="dialogue_emitter_3d" method="start_dialogue"]
 
 [editable path="dialogue_emitter_3d/trigger"]
