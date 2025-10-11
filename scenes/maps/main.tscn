@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c78bdq77ygnhk"]
+[gd_scene load_steps=11 format=3 uid="uid://c78bdq77ygnhk"]
 
 [ext_resource type="PackedScene" uid="uid://e54q0xwbfuo8" path="res://scenes/player/player.tscn" id="1_8wxmh"]
 [ext_resource type="PackedScene" uid="uid://bg7qt4fnwttvq" path="res://scenes/primitives/trigger.tscn" id="2_pwihf"]
+[ext_resource type="Script" uid="uid://5vol0c1sctto" path="res://scripts/interactable/InteractableNode.gd" id="3_6hyye"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8wxmh"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -21,6 +22,12 @@ albedo_color = Color(0.32941177, 0.1764706, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6hyye"]
 size = Vector3(5, 5, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gx8es"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2avkh"]
+size = Vector3(1, 1, 1.2969971)
 
 [node name="main" type="Node3D"]
 
@@ -49,5 +56,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5389414, 3.019484, 0)
 
 [node name="CollisionShape3D" parent="trigger" index="0"]
 shape = SubResource("BoxShape3D_6hyye")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2781496, -4.128669)
+material_override = SubResource("StandardMaterial3D_gx8es")
+
+[node name="InteractableNode" type="Area3D" parent="CSGBox3D"]
+script = ExtResource("3_6hyye")
+metadata/_custom_type_script = "uid://5vol0c1sctto"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/InteractableNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.14849854)
+shape = SubResource("BoxShape3D_2avkh")
 
 [editable path="trigger"]
