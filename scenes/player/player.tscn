@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://e54q0xwbfuo8"]
+[gd_scene load_steps=7 format=3 uid="uid://bidwu6pvfcasl"]
 
 [ext_resource type="Script" uid="uid://c5os2fgtf1upq" path="res://scenes/player/player.gd" id="1_8afob"]
-[ext_resource type="Script" uid="uid://cg2wippfghjib" path="res://scenes/player/main_menu.gd" id="2_dovo2"]
+[ext_resource type="PackedScene" uid="uid://d0aj0u6tpefpb" path="res://scenes/interactable/interact_detector._scenetscn.tscn" id="2_dovo2"]
 [ext_resource type="Script" uid="uid://ya240urtqqhp" path="res://scripts/dialogue/dialogue/DialogueNode.gd" id="3_gmlin"]
+[ext_resource type="Script" path="res://scenes/player/main_menu.gd" id="3_lvxji"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dovo2"]
 
@@ -21,6 +22,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67823935, -0.37198505)
 [node name="Camera3D" type="Camera3D" parent="head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.035546303, -0.040180802)
 
+[node name="InteractDetector" parent="head" instance=ExtResource("2_dovo2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, -0.037, -0.1)
+enable_show_name = true
+
 [node name="ground_check" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.88001686, 0)
 
@@ -38,7 +43,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_dovo2")
+script = ExtResource("3_lvxji")
 
 [node name="menu_container" type="Panel" parent="UI"]
 layout_mode = 1
