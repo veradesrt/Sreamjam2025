@@ -9,7 +9,6 @@ var dp_queue : Array[DialogueProcess]
 
 var cdp : DialogueProcess
 
-
 func _enter_tree() -> void:
 	DialogueGlobalEmitter.start_dialogue.connect(start_dialogue)
 	DialogueGlobalEmitter.force_end_conversation.connect(end_dialogue)
