@@ -42,7 +42,7 @@ size = Vector3(20, 1, 20)
 material = SubResource("StandardMaterial3D_8wxmh")
 
 [node name="player" parent="." instance=ExtResource("1_8wxmh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6280951, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.516809, 2.1821399, 0)
 
 [node name="trigger" parent="." instance=ExtResource("2_pwihf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5389414, 3.019484, 0)

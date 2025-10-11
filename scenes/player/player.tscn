@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://e54q0xwbfuo8"]
+[gd_scene load_steps=5 format=3 uid="uid://e54q0xwbfuo8"]
 
 [ext_resource type="Script" uid="uid://c5os2fgtf1upq" path="res://scenes/player/player.gd" id="1_8afob"]
+[ext_resource type="Script" uid="uid://cg2wippfghjib" path="res://scenes/player/main_menu.gd" id="2_dovo2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dovo2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dovo2"]
 
 [node name="player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 4
@@ -21,4 +24,87 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.035546303, -0.040180802
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.88001686, 0)
 
 [node name="footsteps_player" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9045267, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9571409, 0)
+
+[node name="footsteps_delay" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_dovo2")
+
+[node name="menu_container" type="Panel" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -160.0
+offset_right = 125.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/menu_container"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Menu"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/menu_container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="resume" type="Button" parent="UI/menu_container/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="options" type="Button" parent="UI/menu_container/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="exit" type="Button" parent="UI/menu_container/VBoxContainer"]
+layout_mode = 2
+text = "To main menu"
+
+[node name="dialogue_container" type="Control" parent="UI"]
+layout_mode = 1
+anchor_top = 0.712963
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="UI/dialogue_container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_dovo2")
+
+[connection signal="pressed" from="UI/menu_container/VBoxContainer/resume" to="UI" method="_on_resume_pressed"]
+[connection signal="pressed" from="UI/menu_container/VBoxContainer/options" to="UI" method="_on_options_pressed"]
+[connection signal="pressed" from="UI/menu_container/VBoxContainer/exit" to="UI" method="_on_exit_pressed"]
