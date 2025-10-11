@@ -27,7 +27,7 @@ size = Vector3(5, 5, 5)
 albedo_color = Color(1, 1, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2avkh"]
-size = Vector3(1, 1, 1.2969971)
+size = Vector3(1, 1, 0.9970093)
 
 [node name="main" type="Node3D"]
 
@@ -57,16 +57,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5389414, 3.019484, 0)
 [node name="CollisionShape3D" parent="trigger" index="0"]
 shape = SubResource("BoxShape3D_6hyye")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="InteractableTest" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2781496, -4.128669)
 material_override = SubResource("StandardMaterial3D_gx8es")
 
-[node name="InteractableNode" type="Area3D" parent="CSGBox3D"]
+[node name="InteractableNode" type="Area3D" parent="InteractableTest"]
 script = ExtResource("3_6hyye")
+interactable_name = "Yellow Cube"
 metadata/_custom_type_script = "uid://5vol0c1sctto"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D/InteractableNode"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.14849854)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableTest/InteractableNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0014953613)
 shape = SubResource("BoxShape3D_2avkh")
 
 [editable path="trigger"]

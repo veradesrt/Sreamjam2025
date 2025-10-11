@@ -2,6 +2,7 @@ class_name InteractableNode
 extends Area3D
 
 @export var is_on : bool = true
+@export var interactable_name : String = "Object"
 
 signal interact()
 signal on_contact()
