@@ -7,9 +7,13 @@ class_name Player
 @onready var ground_check: RayCast3D = $ground_check
 ## sound player for the player footsteps
 @onready var footsteps_player: AudioStreamPlayer3D = $footsteps_player
+## used for adding delay after each footstep sound without changin the sound pitch or length
+@onready var footsteps_delay: Timer = $footsteps_delay
 
 @onready var main_menu: Control = $UI
 
+var footsteps_dirt : Array = [load("res://assets/footstep_dirt_1.ogg"),load("res://assets/footstep_dirt_2.ogg")]
+var footsteps_concrete : Array = [load("res://assets/footstep_concrete_1.ogg"),load("res://assets/footstep_concrete_2.ogg"),load("res://assets/footstep_concrete_3.ogg")]
 ## used to control the player movement speed
 const SPEED = 5.0
 ## Unused
@@ -58,11 +62,17 @@ func _physics_process(delta: float) -> void:
 			## get the groups of the detected collider
 			var ground_groups : Array = collider.get_groups()
 			if ground_groups.has("concrete"):
-				#print("walking on concrete")
-				pass
+				if !footsteps_player.playing && footsteps_delay.is_stopped():
+					footsteps_player.stream = footsteps_concrete[randi_range(0,footsteps_concrete.size()-1)]
+					footsteps_player.pitch_scale = randf_range(0.9,1.1)
+					footsteps_player.play()
+					footsteps_delay.wait_time = 0.6
+					footsteps_delay.start()
 			if ground_groups.has("dirt"):
-				#print("walking on dirt")
-				pass
+				if !footsteps_player.playing:
+					footsteps_player.stream = footsteps_dirt[randi_range(0,footsteps_dirt.size()-1)]
+					footsteps_player.pitch_scale = randf_range(0.9,1.1)
+					footsteps_player.play()
 
 			pass
 		velocity.x = direction.x * SPEED

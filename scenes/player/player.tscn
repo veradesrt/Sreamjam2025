@@ -24,7 +24,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.035546303, -0.040180802
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.88001686, 0)
 
 [node name="footsteps_player" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9045267, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9571409, 0)
+
+[node name="footsteps_delay" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
