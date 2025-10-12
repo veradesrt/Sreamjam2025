@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bidwu6pvfcasl"]
+[gd_scene load_steps=8 format=3 uid="uid://bidwu6pvfcasl"]
 
 [ext_resource type="Script" uid="uid://c5os2fgtf1upq" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="PackedScene" uid="uid://d0aj0u6tpefpb" path="res://scenes/interactable/interact_detector._scenetscn.tscn" id="2_dovo2"]
 [ext_resource type="Script" uid="uid://ya240urtqqhp" path="res://scripts/dialogue/dialogue/DialogueNode.gd" id="3_gmlin"]
-[ext_resource type="Script" path="res://scenes/player/main_menu.gd" id="3_lvxji"]
+[ext_resource type="Script" uid="uid://cg2wippfghjib" path="res://scenes/player/main_menu.gd" id="3_lvxji"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dovo2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvxji"]
+bg_color = Color(0.13028675, 0.13028681, 0.1302867, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_dovo2"]
 
@@ -28,9 +31,11 @@ enable_show_name = true
 
 [node name="ground_check" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.88001686, 0)
+target_position = Vector3(0, -0.32, 0)
 
 [node name="footsteps_player" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9571409, 0)
+bus = &"SFX"
 
 [node name="footsteps_delay" type="Timer" parent="."]
 wait_time = 0.6
@@ -102,9 +107,191 @@ mouse_filter = 2
 script = ExtResource("3_gmlin")
 metadata/_custom_type_script = "uid://ya240urtqqhp"
 
+[node name="options" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -200.0
+offset_right = 250.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lvxji")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/options/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="title" type="Label" parent="UI/options/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="mouse_sens" type="Control" parent="UI/options/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="title" type="Label" parent="UI/options/Panel/VBoxContainer/mouse_sens"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Mouse Sensitivity"
+horizontal_alignment = 1
+
+[node name="mouse_sensitivity" type="HSlider" parent="UI/options/Panel/VBoxContainer/mouse_sens"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.48333332
+anchor_right = 0.98
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 2.0
+step = 0.001
+ticks_on_borders = true
+metadata/_edit_use_anchors_ = true
+
+[node name="mouse_sens_value" type="Label" parent="UI/options/Panel/VBoxContainer/mouse_sens/mouse_sensitivity"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48125
+anchor_top = 1.1875
+anchor_right = 0.5208333
+anchor_bottom = 2.625
+offset_right = 1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="master_sound" type="Control" parent="UI/options/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="title" type="Label" parent="UI/options/Panel/VBoxContainer/master_sound"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Master Audio"
+horizontal_alignment = 1
+
+[node name="master_audio" type="HSlider" parent="UI/options/Panel/VBoxContainer/master_sound"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.48333332
+anchor_right = 0.98
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+min_value = -24.0
+max_value = 24.0
+ticks_on_borders = true
+metadata/_edit_use_anchors_ = true
+
+[node name="audio_value" type="Label" parent="UI/options/Panel/VBoxContainer/master_sound/master_audio"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48125
+anchor_top = 1.1875
+anchor_right = 0.5208333
+anchor_bottom = 2.625
+offset_right = 1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="sfx_sound" type="Control" parent="UI/options/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="title" type="Label" parent="UI/options/Panel/VBoxContainer/sfx_sound"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "SFX Audio"
+horizontal_alignment = 1
+
+[node name="sfx_audio" type="HSlider" parent="UI/options/Panel/VBoxContainer/sfx_sound"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.48333332
+anchor_right = 0.98
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+min_value = -24.0
+max_value = 24.0
+ticks_on_borders = true
+metadata/_edit_use_anchors_ = true
+
+[node name="audio_SFX_value" type="Label" parent="UI/options/Panel/VBoxContainer/sfx_sound/sfx_audio"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48125
+anchor_top = 1.1875
+anchor_right = 0.5208333
+anchor_bottom = 2.625
+offset_right = 1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="close" type="Button" parent="UI/options/Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -31.0
+offset_right = 25.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Close & Save"
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_dovo2")
 
 [connection signal="pressed" from="UI/menu_container/VBoxContainer/resume" to="UI" method="_on_resume_pressed"]
 [connection signal="pressed" from="UI/menu_container/VBoxContainer/options" to="UI" method="_on_options_pressed"]
 [connection signal="pressed" from="UI/menu_container/VBoxContainer/exit" to="UI" method="_on_exit_pressed"]
+[connection signal="value_changed" from="UI/options/Panel/VBoxContainer/mouse_sens/mouse_sensitivity" to="UI" method="_on_mouse_sensitivity_value_changed"]
+[connection signal="value_changed" from="UI/options/Panel/VBoxContainer/master_sound/master_audio" to="UI" method="_on_master_audio_value_changed"]
+[connection signal="value_changed" from="UI/options/Panel/VBoxContainer/sfx_sound/sfx_audio" to="UI" method="_on_sfx_audio_value_changed"]
+[connection signal="pressed" from="UI/options/Panel/close" to="UI" method="close_options"]

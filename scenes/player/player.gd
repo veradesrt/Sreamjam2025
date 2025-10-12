@@ -14,30 +14,32 @@ class_name Player
 
 var footsteps_dirt : Array = [load("res://assets/footstep_dirt_1.ogg"),load("res://assets/footstep_dirt_2.ogg")]
 var footsteps_concrete : Array = [load("res://assets/footstep_concrete_1.ogg"),load("res://assets/footstep_concrete_2.ogg"),load("res://assets/footstep_concrete_3.ogg")]
+
 ## used to control the player movement speed
 const SPEED = 5.0
+
 ## Unused
-const JUMP_VELOCITY = 4.5
+const JUMP_VELOCITY = 2
 
 ## mouse sensitivity, used for camera control
-@export var mouse_sens : float = 0.001
+var mouse_sens : float 
 
 func _ready() -> void:
 	## on startup set the mouse mode to captured so the player can look around
 	change_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	mouse_sens = PlayerData.get_mouse_sensitivity()
+	PlayerData.mouse_sens_changed.connect(change_mouse_mode)
 
 ## function used to change the mouse mode from a single place
 func change_mouse_mode(new_mode):
 	Input.mouse_mode = new_mode
 
 func open_exit_menu():
-	
 	pass
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("escape"):
-		change_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		pass
+		main_menu.menu_update_request()
 	if event is InputEventMouseMotion && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(event.relative.x * -1 *mouse_sens)
 		head.rotate_x(event.relative.y * -1 *mouse_sens)
@@ -48,8 +50,8 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-	#	velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
 
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -74,7 +76,6 @@ func _physics_process(delta: float) -> void:
 					footsteps_player.pitch_scale = randf_range(0.9,1.1)
 					footsteps_player.play()
 
-			pass
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:

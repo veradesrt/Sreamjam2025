@@ -19,10 +19,15 @@ config/icon="res://icon.svg"
 [autoload]
 
 DialogueGlobalEmitter="*res://scripts/dialogue/dialogue/DialogueGlobalEmitter.gd"
+PlayerData="*res://scripts/player_singleton/player_data.gd"
 
 [debug]
 
 gdscript/warnings/unassigned_variable=2
+
+[display]
+
+window/size/resizable=false
 
 [global_group]
 
