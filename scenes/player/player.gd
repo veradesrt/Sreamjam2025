@@ -28,11 +28,14 @@ func _ready() -> void:
 	## on startup set the mouse mode to captured so the player can look around
 	change_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	mouse_sens = PlayerData.get_mouse_sensitivity()
-	PlayerData.mouse_sens_changed.connect(change_mouse_mode)
+	PlayerData.mouse_sens_changed.connect(change_mouse_sens)
 
 ## function used to change the mouse mode from a single place
 func change_mouse_mode(new_mode):
 	Input.mouse_mode = new_mode
+
+func change_mouse_sens(new_sens:float)->void:
+	mouse_sens = new_sens
 
 func open_exit_menu():
 	pass
@@ -50,7 +53,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")

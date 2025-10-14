@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 
 func set_mouse_sensitivity(new_value:float)->void:
 	mouse_sensitivity = new_value
-	mouse_sens_changed.emit()
+	mouse_sens_changed.emit(mouse_sensitivity)
 
 func get_mouse_sensitivity()->float:
 	return mouse_sensitivity
