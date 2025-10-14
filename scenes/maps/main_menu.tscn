@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cm5fdk81bqipp"]
+
+[node name="main menu" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65632474, 0.8528051)
+
+[node name="Control" type="Control" parent="Camera3D"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
