@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bidwu6pvfcasl"]
+[gd_scene load_steps=10 format=3 uid="uid://bidwu6pvfcasl"]
 
 [ext_resource type="Script" uid="uid://c5os2fgtf1upq" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="PackedScene" uid="uid://d0aj0u6tpefpb" path="res://scenes/interactable/interact_detector._scenetscn.tscn" id="2_dovo2"]
@@ -11,7 +11,11 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvxji"]
 bg_color = Color(0.13028675, 0.13028681, 0.1302867, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p47bc"]
+albedo_color = Color(0, 0, 0.53333336, 1)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_dovo2"]
+material = SubResource("StandardMaterial3D_p47bc")
 
 [node name="player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 4

@@ -1,20 +1,23 @@
-[gd_scene load_steps=13 format=3 uid="uid://c78bdq77ygnhk"]
+[gd_scene load_steps=19 format=3 uid="uid://c78bdq77ygnhk"]
 
 [ext_resource type="PackedScene" uid="uid://bidwu6pvfcasl" path="res://scenes/player/player.tscn" id="1_8wxmh"]
+[ext_resource type="Texture2D" uid="uid://bxus45v6kb04f" path="res://assets/3D models/satara_night_no_lamps_1k.exr" id="1_dlv6v"]
 [ext_resource type="PackedScene" uid="uid://bg7qt4fnwttvq" path="res://scenes/primitives/trigger.tscn" id="2_pwihf"]
 [ext_resource type="Script" uid="uid://5vol0c1sctto" path="res://scripts/interactable/InteractableNode.gd" id="3_6hyye"]
 [ext_resource type="PackedScene" uid="uid://kutieyc8oj64" path="res://scenes/primitives/dialogue_emitter_3d.tscn" id="3_gx8es"]
 [ext_resource type="Resource" uid="uid://b7pcjhuuijv50" path="res://resources/dialogue/example.tres" id="4_2avkh"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8wxmh"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_n56wl"]
+rayleigh_coefficient = 5.94
+turbidity = 61.8
+night_sky = ExtResource("1_dlv6v")
 
 [sub_resource type="Sky" id="Sky_pwihf"]
-sky_material = SubResource("ProceduralSkyMaterial_8wxmh")
+sky_material = SubResource("PhysicalSkyMaterial_n56wl")
 
 [sub_resource type="Environment" id="Environment_6hyye"]
 background_mode = 2
+background_energy_multiplier = 0.56
 sky = SubResource("Sky_pwihf")
 tonemap_mode = 2
 glow_enabled = true
@@ -31,33 +34,52 @@ albedo_color = Color(1, 1, 0, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_2avkh"]
 size = Vector3(1, 1, 0.9970093)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2avkh"]
+albedo_color = Color(0.43137255, 0.4509804, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dlv6v"]
+albedo_color = Color(0, 0.5019608, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n56wl"]
+albedo_color = Color(0.43982103, 0.43982103, 0.439821, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m6k0o"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.61960787)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ss43a"]
+albedo_color = Color(0, 0.5568628, 1, 1)
+
 [node name="main" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6hyye")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+transform = Transform3D(-0.8660254, -0.43301278, 0.24999999, -0.2116966, 0.7705178, 0.6012377, -0.45297304, 0.46776295, -0.75895536, 0, 12.653206, -12.454037)
 shadow_enabled = true
+sky_mode = 2
 
 [node name="concrete_ground" type="CSGBox3D" parent="." groups=["concrete"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30.392406)
 use_collision = true
 size = Vector3(20, 1, 20)
 
 [node name="dirt_ground" type="CSGBox3D" parent="." groups=["dirt"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07369423, 0, 10.511677)
 use_collision = true
 size = Vector3(20, 1, 20)
 material = SubResource("StandardMaterial3D_8wxmh")
 
 [node name="player" parent="." instance=ExtResource("1_8wxmh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.516809, 2.1821399, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9711571, 2.1821399, 10.195766)
 
 [node name="dialogue_emitter_3d" parent="." instance=ExtResource("3_gx8es")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.556388, 2.8090482, 0)
 dialogue = ExtResource("4_2avkh")
 
 [node name="trigger" parent="dialogue_emitter_3d" instance=ExtResource("2_pwihf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8488073, 0.69369125, 0)
 
 [node name="CollisionShape3D" parent="dialogue_emitter_3d/trigger" index="0"]
 shape = SubResource("BoxShape3D_6hyye")
@@ -74,6 +96,344 @@ metadata/_custom_type_script = "uid://5vol0c1sctto"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableTest/InteractableNode"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0014953613)
 shape = SubResource("BoxShape3D_2avkh")
+
+[node name="blockout" type="CSGBox3D" parent="." groups=["concrete"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52350235, 0, -63.925903)
+use_collision = true
+size = Vector3(120.877846, 1, 128.8518)
+
+[node name="entrance" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.153656, 4.2398396, 63.892506)
+size = Vector3(21.054138, 7.9993896, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="blockout/entrance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6523764, 0)
+operation = 2
+size = Vector3(4.08, 4.337175, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="blockout/entrance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8991027, -0.9222779, 0)
+operation = 2
+size = Vector3(6.351035, 5.797372, 1)
+
+[node name="caseta" type="CSGBox3D" parent="blockout/entrance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7097034, -1.4374232, -2.9220624)
+size = Vector3(4.3427124, 4.782715, 4.9772644)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="blockout/entrance/caseta"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.044840336, 0)
+operation = 2
+size = Vector3(4.288, 4.638, 4.747)
+
+[node name="doorframe" type="CSGBox3D" parent="blockout/entrance/caseta"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.868057, -2.4287143)
+operation = 2
+size = Vector3(1.915, 2.846, 1)
+
+[node name="window" type="CSGBox3D" parent="blockout/entrance/caseta"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2758007, -0.39068174, 2.2836518)
+operation = 2
+size = Vector3(2.7167969, 1.461792, 1)
+
+[node name="window2" type="CSGBox3D" parent="blockout/entrance/caseta"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.905118, -0.39068174, 0.62107086)
+operation = 2
+size = Vector3(2.7167969, 1.461792, 1)
+
+[node name="Label3D" type="Label3D" parent="blockout/entrance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9832273, -1.9284842, 0)
+text = "guard outpost"
+
+[node name="outside" type="CSGSphere3D" parent="blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 57.82721)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="blockout/outside"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.779686, 0, -8.669682)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="blockout/outside"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.040024, 2.9127827, -2.5824318)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="blockout/outside"]
+transform = Transform3D(0.66059154, 0, 0.75074553, 0, 1, 0, -0.75074553, 0, 0.66059154, -9.373331, 0, -16.457588)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="blockout/outside"]
+transform = Transform3D(0.66059154, 0, 0.75074553, 0, 1, 0, -0.75074553, 0, 0.66059154, -17.71829, 0, -20.09787)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D6" type="CSGSphere3D" parent="blockout/outside"]
+transform = Transform3D(0.66059154, 0, 0.75074553, 0, 1, 0, -0.75074553, 0, 0.66059154, -14.641476, 2.9127827, -14.3797455)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="outside2" type="CSGSphere3D" parent="blockout"]
+transform = Transform3D(0.66036874, 0, 0.7509415, 0, 1, 0, -0.7509415, 0, 0.66036874, -39.337757, 0, 38.563457)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="blockout/outside2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.779686, 0, -8.669682)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="blockout/outside2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.040024, 2.9127827, -2.5824318)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="blockout/outside2"]
+transform = Transform3D(0.66059154, 0, 0.75074553, 0, 1, 0, -0.75074553, 0, 0.66059154, -9.373331, 0, -16.457588)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="blockout/outside2"]
+transform = Transform3D(0.66059154, 0, 0.75074553, 0, 1, 0, -0.75074553, 0, 0.66059154, -17.71829, 0, -20.09787)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D6" type="CSGSphere3D" parent="blockout/outside2"]
+transform = Transform3D(0.66059154, 0, 0.75074553, 0, 1, 0, -0.75074553, 0, 0.66059154, -14.641476, 2.9127827, -14.3797455)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="outside3" type="CSGSphere3D" parent="blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.992397, 7.8299217, 65.73881)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="blockout/outside3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.779686, 0, -8.669682)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="blockout/outside3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.040024, 2.9127827, -2.5824318)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="blockout/outside3"]
+transform = Transform3D(0.66059154, 0, 0.75074553, 0, 1, 0, -0.75074553, 0, 0.66059154, -9.373331, 0, -16.457588)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="blockout/outside3"]
+transform = Transform3D(0.66059154, 0, 0.75074553, 0, 1, 0, -0.75074553, 0, 0.66059154, -17.71829, 0, -20.09787)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D6" type="CSGSphere3D" parent="blockout/outside3"]
+transform = Transform3D(0.66059154, 0, 0.75074553, 0, 1, 0, -0.75074553, 0, 0.66059154, -14.641476, 2.9127827, -14.3797455)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="outside4" type="CSGSphere3D" parent="blockout"]
+transform = Transform3D(0.66036874, 0, 0.7509415, 0, 1, 0, -0.7509415, 0, 0.66036874, -47.330154, 7.8299217, 46.475056)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="blockout/outside4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.779686, 0, -8.669682)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="blockout/outside4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.040024, 2.9127827, -2.5824318)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="blockout/outside4"]
+transform = Transform3D(0.66059154, 0, 0.75074553, 0, 1, 0, -0.75074553, 0, 0.66059154, -9.373331, 0, -16.457588)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="blockout/outside4"]
+transform = Transform3D(0.66059154, 0, 0.75074553, 0, 1, 0, -0.75074553, 0, 0.66059154, -17.71829, 0, -20.09787)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D6" type="CSGSphere3D" parent="blockout/outside4"]
+transform = Transform3D(0.66059154, 0, 0.75074553, 0, 1, 0, -0.75074553, 0, 0.66059154, -14.641476, 2.9127827, -14.3797455)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="outside5" type="CSGSphere3D" parent="blockout"]
+transform = Transform3D(0.30123845, 0, 0.9535489, 0, 1, 0, -0.9535489, 0, 0.30123845, 22.878471, -1.9862318, 17.988037)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="blockout/outside5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.779686, 0, -8.669682)
+radius = 8.0
+material = SubResource("StandardMaterial3D_2avkh")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.607147, 0, 35.876938)
+operation = 2
+radius = 8.215
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5426674, 0, 13.963745)
+operation = 2
+radius = 8.215
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1789608, 0, 29.981354)
+operation = 2
+radius = 11.90297
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1789608, 0, -1.3764648)
+operation = 2
+radius = 11.90297
+
+[node name="CSGSphere3D7" type="CSGSphere3D" parent="blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2408257, 0, -20.573395)
+operation = 2
+radius = 19.486874
+
+[node name="CSGSphere3D6" type="CSGSphere3D" parent="blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.158085, 0, 18.3685)
+operation = 2
+radius = 11.90297
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4130335, 0, -1.3764648)
+operation = 2
+radius = 11.90297
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5666504, -1.0416703, -3.2980576)
+size = Vector3(41.1333, 1, 107.09918)
+material = SubResource("StandardMaterial3D_dlv6v")
+
+[node name="bathroom" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(0.6885951, 0, 0.72514606, 0, 1, 0, -0.72514606, 0, 0.6885951, 27.933859, 2.4853582, 53.605698)
+size = Vector3(16.378052, 4, 13.62)
+material = SubResource("StandardMaterial3D_n56wl")
+
+[node name="bathroom2" type="CSGBox3D" parent="blockout/bathroom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0828805, 0)
+operation = 2
+size = Vector3(16.103, 3.82, 13.36)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="blockout/bathroom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16191483, -0.52668715, -6.7360725)
+operation = 2
+size = Vector3(2.5, 2.927246, 1)
+
+[node name="Label3D" type="Label3D" parent="blockout/bathroom"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -0.09526348, -6.9088583)
+pixel_size = 0.0145
+text = "bathroom"
+
+[node name="restaurant" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.364735, 2.1472838, 16.863518)
+size = Vector3(37.163895, 3.311, 55.61963)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="blockout/restaurant"]
+transform = Transform3D(0.965754, 0, -0.2594596, 0, 1, 0, 0.2594596, 0, 0.965754, -13.423847, 0, -16.223732)
+operation = 2
+size = Vector3(18.87879, 8.965, 35.606495)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="blockout/restaurant"]
+transform = Transform3D(0.9683397, 0, 0.24963644, 0, 1, 0, -0.24963644, 0, 0.9683397, -13.641815, 0, 4.0496902)
+operation = 2
+size = Vector3(18.264416, 8.965, 16.3)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="blockout/restaurant"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4093056, 0.09710693, -1.1048546)
+operation = 2
+size = Vector3(4.201, 3.765, 6.44)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="blockout/restaurant"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.057891846, -0.096512556, -1.1048546)
+operation = 2
+size = Vector3(6.734, 3.2247188, 4.325)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="blockout/restaurant"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.787071, 0.02822876, 0)
+operation = 2
+size = Vector3(13.050781, 3.06, 52.995)
+
+[node name="Label3D" type="Label3D" parent="blockout/restaurant"]
+transform = Transform3D(0, 0, -1.0000001, 0, 1, 0, 1.0000001, 0, 0, -4.0357018, 0, -0.69760513)
+text = "restaurant"
+
+[node name="fence" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(0.9577874, 0, 0.28747752, 0, 1, 0, -0.28747752, 0, 0.9577874, 50.029312, 2.9949543, -11.459618)
+size = Vector3(26.7677, 4.98938, 0.29016113)
+material = SubResource("StandardMaterial3D_m6k0o")
+
+[node name="fence2" type="CSGBox3D" parent="blockout/fence"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.538681)
+size = Vector3(26.7677, 4.98938, 0.29016113)
+material = SubResource("StandardMaterial3D_m6k0o")
+
+[node name="fence3" type="CSGBox3D" parent="blockout/fence"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40.17392)
+size = Vector3(26.7677, 4.98938, 0.29016113)
+material = SubResource("StandardMaterial3D_m6k0o")
+
+[node name="fence4" type="CSGBox3D" parent="blockout/fence"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 13.479809, 0, -20.243385)
+size = Vector3(40.16211, 4.989, 0.29)
+material = SubResource("StandardMaterial3D_m6k0o")
+
+[node name="fence5" type="CSGBox3D" parent="blockout/fence"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -13.185829, 0, -20.243385)
+size = Vector3(40.16211, 4.989, 0.29)
+material = SubResource("StandardMaterial3D_m6k0o")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="blockout/fence/fence5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.30674, -1.055233, 0)
+operation = 2
+size = Vector3(2.8895264, 2.9926758, 1)
+
+[node name="Label3D" type="Label3D" parent="blockout/fence"]
+transform = Transform3D(0.053277127, 0, -0.99857974, 0, 1, 0, 0.99857974, 0, 0.053277127, -14.26651, 0, -9.218483)
+pixel_size = 0.01
+text = "Pool"
+
+[node name="pool" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(0.9577874, 0, 0.28747752, 0, 1, 0, -0.28747752, 0, 0.9577874, 47.404556, -0.44570756, -20.846375)
+operation = 2
+size = Vector3(20.247818, 2.206, 8.475)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(0.9577874, 0, 0.28747752, 0, 1, 0, -0.28747752, 0, 0.9577874, 47.364086, -1.8656104, -20.885468)
+size = Vector3(21.486, 5.602539, 10.67)
+
+[node name="pool" type="CSGBox3D" parent="blockout/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.091495514, 1.2375801, 0.0699234)
+operation = 2
+size = Vector3(20.064827, 3.493137, 8.335156)
+material = SubResource("StandardMaterial3D_ss43a")
+
+[node name="waterslide" type="CSGBox3D" parent="blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 7.2426147, -57)
+size = Vector3(1, 15.4852295, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="blockout/waterslide"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0.3344574)
+size = Vector3(14.3, 1, 26.556248)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="blockout/waterslide"]
+transform = Transform3D(1, 0, 0, 0, 0.573605, 0.81913203, 0, -0.81913203, 0.573605, 0, 4.2103243, 20.885696)
+radius = 0.998
+height = 20.759521
+
+[node name="Label3D" type="Label3D" parent="blockout/waterslide"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.7048926, 1.8823624)
+pixel_size = 0.01
+text = "water slide"
 
 [connection signal="player_entered" from="dialogue_emitter_3d/trigger" to="dialogue_emitter_3d" method="start_dialogue"]
 
