@@ -1,12 +1,231 @@
-[gd_scene format=3 uid="uid://cm5fdk81bqipp"]
+[gd_scene load_steps=3 format=3 uid="uid://cm5fdk81bqipp"]
+
+[ext_resource type="Script" uid="uid://b6x1btd1tema1" path="res://scenes/maps/main_menu.gd" id="1_4rqo4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4rqo4"]
+bg_color = Color(0.13028675, 0.13028681, 0.1302867, 1)
 
 [node name="main menu" type="Node3D"]
+script = ExtResource("1_4rqo4")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65632474, 0.8528051)
 
-[node name="Control" type="Control" parent="Camera3D"]
+[node name="UI" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.029513888
+anchor_top = 0.25617284
+anchor_right = 0.3142361
+anchor_bottom = 1.0
+theme_override_constants/separation = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="play" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="settings" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "settings"
+
+[node name="credits" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "credits"
+
+[node name="exit" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "exit
+"
+
+[node name="options" type="Control" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.125
+offset_top = -142.5
+offset_right = 178.125
+offset_bottom = 142.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4rqo4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/options/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="title" type="Label" parent="UI/options/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="mouse_sens" type="Control" parent="UI/options/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="title" type="Label" parent="UI/options/Panel/VBoxContainer/mouse_sens"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Mouse Sensitivity"
+horizontal_alignment = 1
+
+[node name="mouse_sensitivity" type="HSlider" parent="UI/options/Panel/VBoxContainer/mouse_sens"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.48333332
+anchor_right = 0.98
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 2.0
+step = 0.001
+ticks_on_borders = true
+metadata/_edit_use_anchors_ = true
+
+[node name="mouse_sens_value" type="Label" parent="UI/options/Panel/VBoxContainer/mouse_sens/mouse_sensitivity"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48125
+anchor_top = 1.1875
+anchor_right = 0.5208333
+anchor_bottom = 2.625
+offset_right = 1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="master_sound" type="Control" parent="UI/options/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="title" type="Label" parent="UI/options/Panel/VBoxContainer/master_sound"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Master Audio"
+horizontal_alignment = 1
+
+[node name="master_audio" type="HSlider" parent="UI/options/Panel/VBoxContainer/master_sound"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.48333332
+anchor_right = 0.98
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+min_value = -24.0
+max_value = 24.0
+ticks_on_borders = true
+metadata/_edit_use_anchors_ = true
+
+[node name="audio_value" type="Label" parent="UI/options/Panel/VBoxContainer/master_sound/master_audio"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48125
+anchor_top = 1.1875
+anchor_right = 0.5208333
+anchor_bottom = 2.625
+offset_right = 1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="sfx_sound" type="Control" parent="UI/options/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="title" type="Label" parent="UI/options/Panel/VBoxContainer/sfx_sound"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "SFX Audio"
+horizontal_alignment = 1
+
+[node name="sfx_audio" type="HSlider" parent="UI/options/Panel/VBoxContainer/sfx_sound"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.48333332
+anchor_right = 0.98
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+min_value = -24.0
+max_value = 24.0
+ticks_on_borders = true
+metadata/_edit_use_anchors_ = true
+
+[node name="audio_SFX_value" type="Label" parent="UI/options/Panel/VBoxContainer/sfx_sound/sfx_audio"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48125
+anchor_top = 1.1875
+anchor_right = 0.5208333
+anchor_bottom = 2.625
+offset_right = 1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="close" type="Button" parent="UI/options/Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -31.0
+offset_right = 25.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Close & Save"
+
+[connection signal="pressed" from="UI/VBoxContainer/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="UI/VBoxContainer/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="UI/VBoxContainer/credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="UI/VBoxContainer/exit" to="." method="_on_exit_pressed"]

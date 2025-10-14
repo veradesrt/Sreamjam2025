@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://dm8k7cg8r2lwo"]
+
+[ext_resource type="Script" uid="uid://c3smbg67whm0m" path="res://scenes/maps/cutscene.gd" id="1_7nlm1"]
+[ext_resource type="PackedScene" uid="uid://kutieyc8oj64" path="res://scenes/primitives/dialogue_emitter_3d.tscn" id="2_ok5ce"]
+[ext_resource type="Script" uid="uid://jepaqxoulkry" path="res://scripts/dialogue/text/Text.gd" id="3_skdqt"]
+[ext_resource type="Script" uid="uid://d6yrcdl51eli" path="res://scripts/dialogue/dialogue/Dialogue.gd" id="4_tkn67"]
+[ext_resource type="Script" uid="uid://ya240urtqqhp" path="res://scripts/dialogue/dialogue/DialogueNode.gd" id="5_skdqt"]
+
+[sub_resource type="Resource" id="Resource_xea7j"]
+script = ExtResource("3_skdqt")
+content = "test"
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_18bjg"]
+script = ExtResource("3_skdqt")
+content = "las test"
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_ohyd1"]
+script = ExtResource("4_tkn67")
+dialogue = Array[ExtResource("3_skdqt")]([SubResource("Resource_xea7j"), SubResource("Resource_18bjg")])
+metadata/_custom_type_script = "uid://d6yrcdl51eli"
+
+[node name="cutscene" type="Node3D"]
+script = ExtResource("1_7nlm1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.36821187)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6436487)
+text = "cutscene"
+
+[node name="dialogue_emitter_3d" parent="." instance=ExtResource("2_ok5ce")]
+dialogue = SubResource("Resource_ohyd1")
+
+[node name="DialogueNode" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_skdqt")
+metadata/_custom_type_script = "uid://ya240urtqqhp"
