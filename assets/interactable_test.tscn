@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3757hjj411fm"]
+
+[ext_resource type="Texture2D" uid="uid://dk6ux8aiesioe" path="res://icon.svg" id="1_v0x4m"]
+
+[node name="interactable_test" type="Sprite3D"]
+visibility_range_end = 10.0
+visibility_range_end_margin = 3.0
+visibility_range_fade_mode = 1
+billboard = 1
+no_depth_test = true
+texture = ExtResource("1_v0x4m")
