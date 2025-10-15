@@ -1,3 +1,4 @@
+class_name DialogueEmitter3D
 extends Node3D
 ## add the text resource for dialogue
 @export var dialogue : Dialogue

@@ -32,10 +32,10 @@ func _process(delta: float) -> void:
 		if(current_state_touching):
 			current_interactable_node = ray_cast.get_collider() as InteractableNode
 			is_touching.emit()
-			current_interactable_node.on_contact.emit()
+			current_interactable_node._on_contact()
 		else:
 			not_touching.emit()
-			current_interactable_node.out_of_contact.emit()
+			current_interactable_node._out_of_contact()
 			current_interactable_node = null
 			label_name.hide()
 		
@@ -46,4 +46,4 @@ func _process(delta: float) -> void:
 		previous_state_touching = current_state_touching
 	
 	if(Input.is_action_just_pressed("enter") and current_state_touching):
-		current_interactable_node.interact.emit()
+		current_interactable_node._interact()

@@ -11,23 +11,20 @@ signal out_of_contact()
 func _enter_tree() -> void:
 	set_collision_layer_value(1,false)
 	set_collision_layer_value(4,true)
-	interact.connect(_interact)
-	on_contact.connect(_on_contact)
-	out_of_contact.connect(_out_of_contact)
 	monitoring = false
 	switch(is_on)
 
 func _interact() -> void:
 	print("interact")
-	pass
+	interact.emit()
 
 func _on_contact() -> void:
 	print("on_contact")
-	pass
+	on_contact.emit()
 
 func _out_of_contact() -> void:
 	print("out_of_contact")
-	pass
+	out_of_contact.emit()
 
 func switch(state : bool) -> void:
 	monitorable = state
