@@ -304,8 +304,9 @@ mesh = SubResource("CapsuleMesh_dovo2")
 [node name="InventoryNode" type="Node" parent="."]
 script = ExtResource("7_qek5x")
 
-[node name="DialogueHandler" type="Node" parent="."]
+[node name="DialogueHandler" type="Node" parent="." node_paths=PackedStringArray("movement_configuration")]
 script = ExtResource("9_h17s1")
+movement_configuration = NodePath("../MovementConfiguration")
 
 [connection signal="pressed" from="UI/menu_container/VBoxContainer/resume" to="UI" method="_on_resume_pressed"]
 [connection signal="pressed" from="UI/menu_container/VBoxContainer/options" to="UI" method="_on_options_pressed"]

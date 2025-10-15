@@ -5,6 +5,7 @@ extends Node
 
 func _enter_tree() -> void:
 	DialogueGlobalEmitter.has_started.connect(is_on_dialogue)
+	DialogueGlobalEmitter.has_ended.connect(is_out_dialogue)
 	pass
 
 func is_on_dialogue() -> void:

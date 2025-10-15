@@ -55,6 +55,15 @@ func _physics_process(delta: float) -> void:
 
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if(movement_configuration.CAN_MOVE):
+		move(direction)
+	else:
+		velocity = Vector3.ZERO
+	
+	move_and_slide()
+
+
+func move(direction : Vector3) -> void:
 	if direction:
 		##only if the player is moving
 		##check if the ground check can detect ground
@@ -81,6 +90,3 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, movement_configuration.SPEED)
 		velocity.z = move_toward(velocity.z, 0, movement_configuration.SPEED)
-	
-	print(velocity)
-	move_and_slide()
