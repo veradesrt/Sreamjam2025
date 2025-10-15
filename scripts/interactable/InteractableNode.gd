@@ -4,6 +4,10 @@ extends Area3D
 @export var is_on : bool = true
 @export var interactable_name : String = "Object"
 
+@export_group("Components")
+@export var dialogue_emitter : DialogueEmitter3D
+@export var item_node : ItemNode
+
 signal interact()
 signal on_contact()
 signal out_of_contact()
@@ -15,7 +19,6 @@ func _enter_tree() -> void:
 	switch(is_on)
 
 func _interact() -> void:
-	print("interact")
 	interact.emit()
 
 func _on_contact() -> void:

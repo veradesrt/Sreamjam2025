@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://c78bdq77ygnhk"]
+[gd_scene load_steps=11 format=3 uid="uid://c78bdq77ygnhk"]
 
 [ext_resource type="PackedScene" uid="uid://bidwu6pvfcasl" path="res://scenes/player/player.tscn" id="1_8wxmh"]
 [ext_resource type="PackedScene" uid="uid://bg7qt4fnwttvq" path="res://scenes/primitives/trigger.tscn" id="2_pwihf"]
-[ext_resource type="Script" uid="uid://5vol0c1sctto" path="res://scripts/interactable/InteractableNode.gd" id="3_6hyye"]
 [ext_resource type="PackedScene" uid="uid://kutieyc8oj64" path="res://scenes/primitives/dialogue_emitter_3d.tscn" id="3_gx8es"]
 [ext_resource type="Resource" uid="uid://b7pcjhuuijv50" path="res://resources/dialogue/example.tres" id="4_2avkh"]
 [ext_resource type="Texture2D" uid="uid://dk6ux8aiesioe" path="res://icon.svg" id="6_dlv6v"]
@@ -25,12 +24,6 @@ albedo_color = Color(0.32941177, 0.1764706, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6hyye"]
 size = Vector3(5, 5, 5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gx8es"]
-albedo_color = Color(1, 1, 0, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_2avkh"]
-size = Vector3(1, 1, 0.9970093)
 
 [node name="main" type="Node3D"]
 
@@ -62,19 +55,6 @@ dialogue = ExtResource("4_2avkh")
 
 [node name="CollisionShape3D" parent="dialogue_emitter_3d/trigger" index="0"]
 shape = SubResource("BoxShape3D_6hyye")
-
-[node name="InteractableTest" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2781496, -4.128669)
-material_override = SubResource("StandardMaterial3D_gx8es")
-
-[node name="InteractableNode" type="Area3D" parent="InteractableTest"]
-script = ExtResource("3_6hyye")
-interactable_name = "Yellow Cube"
-metadata/_custom_type_script = "uid://5vol0c1sctto"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableTest/InteractableNode"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0014953613)
-shape = SubResource("BoxShape3D_2avkh")
 
 [node name="interactable_test" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
