@@ -4,7 +4,7 @@ extends Node3D
 
 
 func _ready() -> void:
-	interactable_node.interact.connect(delete)
+	interactable_node.last_interact.connect(delete)
 
 func delete() -> void:
 	queue_free()

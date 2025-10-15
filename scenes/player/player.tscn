@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://ya240urtqqhp" path="res://scripts/dialogue/dialogue/DialogueNode.gd" id="3_gmlin"]
 [ext_resource type="Script" uid="uid://cg2wippfghjib" path="res://scenes/player/main_menu.gd" id="3_lvxji"]
 [ext_resource type="PackedScene" uid="uid://cdulne3g8vx5r" path="res://scenes/crosshair/CrosshairNode.tscn" id="3_p47bc"]
-[ext_resource type="Script" uid="uid://c4wdjk3jkijak" path="res://scenes/player/interact_manager.gd" id="4_0owmy"]
+[ext_resource type="Script" uid="uid://c4wdjk3jkijak" path="res://scripts/interactable/InteractManager.gd" id="4_0owmy"]
 [ext_resource type="Script" uid="uid://cg3xg3ma6pnd4" path="res://scripts/items/InventoryNode.gd" id="7_qek5x"]
 [ext_resource type="Script" uid="uid://u35bbvtcevcq" path="res://scripts/dialogue/dialogue/DialogueHandler.gd" id="9_h17s1"]
 
@@ -40,8 +40,10 @@ interactable_detector_reference = NodePath("../InteractDetector")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, -0.037, -0.099999994)
 enable_show_name = true
 
-[node name="InteractManager" type="Node" parent="head"]
+[node name="InteractManager" type="Node" parent="head" node_paths=PackedStringArray("interact_detector", "inventory")]
 script = ExtResource("4_0owmy")
+interact_detector = NodePath("../InteractDetector")
+inventory = NodePath("../../InventoryNode")
 
 [node name="ground_check" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.88001686, 0)
