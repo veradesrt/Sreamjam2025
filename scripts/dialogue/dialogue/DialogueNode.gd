@@ -54,10 +54,10 @@ func end_dialogue() -> void:
 	if(cdp == null):
 		return
 	
+	DialogueGlobalEmitter.has_ended.emit(cdp.dialogue)
 	remove_ui(cdp.dialogue_box)
 	cdp.next_text_timer.queue_free()
 	cdp = null
-	DialogueGlobalEmitter.has_ended.emit()
 	
 	match(hierarchy_mode):
 		HierarchyMode.QUEUE_FRONT:
@@ -73,13 +73,9 @@ func create_dialogue_process(dialogue : Dialogue) -> DialogueProcess:
 	dp.dialogue = dialogue
 	dp.dialogue_length = dp.dialogue.dialogue.size()-1
 	
-
-	
 	match(dialogue.mode):
-		Dialogue.Mode.BASIC:
+		Dialogue.DialogueMode.BASIC:
 			dp.dialogue_box = DIALOGUE_BASIC_SCENE.instantiate() as BasicBoxUI
-		_:
-			printerr("not let the default one triggers lol")
 	
 	return dp
 
@@ -88,7 +84,7 @@ func next_dialogue() -> void:
 		HierarchyMode.QUEUE_FRONT:
 			cdp = dp_queue.front()
 	instantiate_nodes(cdp)
-	DialogueGlobalEmitter.has_started.emit()
+	DialogueGlobalEmitter.has_started.emit(cdp.dialogue)
 	next_text()
 
 func next_text() -> void:
@@ -113,6 +109,8 @@ func next_text() -> void:
 	
 	cdp.next_text_timer.wait_time = cdp.current_text.skip_time
 	cdp.next_text_timer.timeout.connect(next_text)
+	
+	DialogueGlobalEmitter.next_text.emit(new_text)
 	
 	if(new_text.enable_typewrite):
 		next_letter()
