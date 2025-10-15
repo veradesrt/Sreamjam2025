@@ -14,9 +14,11 @@ class_name Player
 
 @onready var movement_configuration: MovementConfiguration = $MovementConfiguration
 
+@onready var inventory_node: InventoryNode = $InventoryNode
 
 var footsteps_dirt : Array = [load("res://assets/footstep_dirt_1.ogg"),load("res://assets/footstep_dirt_2.ogg")]
 var footsteps_concrete : Array = [load("res://assets/footstep_concrete_1.ogg"),load("res://assets/footstep_concrete_2.ogg"),load("res://assets/footstep_concrete_3.ogg")]
+
 
 ## mouse sensitivity, used for camera control
 var mouse_sens : float 

@@ -33,8 +33,11 @@ func _process(delta: float) -> void:
 			is_touching.emit(current_interactable_node)
 			current_interactable_node._on_contact()
 		else:
-			not_touching.emit(current_interactable_node)
-			current_interactable_node._out_of_contact()
+			if(current_interactable_node != null):
+				not_touching.emit(current_interactable_node)
+				current_interactable_node._out_of_contact()
+			else:
+				not_touching.emit(null)
 			current_interactable_node = null
 			label_name.hide()
 		

@@ -4,22 +4,25 @@ extends Node
 @export var interact_detector : InteractDetector
 @export var inventory : InventoryNode
 
+var is_interacting : bool = false
+
 func _ready() -> void:
 	interact_detector.is_touching.connect(is_touching)
 	interact_detector.not_touching.connect(not_touching)
 
 func _process(_delta: float) -> void:
-	if(Input.is_action_just_pressed("enter") and interact_detector.current_state_touching):
+	if(Input.is_action_just_pressed("enter") and interact_detector.current_state_touching and is_interacting == false):
 		interacted(interact_detector.current_interactable_node)
 
 func interacted(i : InteractableNode) -> void:
+	is_interacting = true
 	i._first_interact()
 	
 	##esto no esta tan gucci pero si en algun momento hace falta se hace una queue y se saca todo esto
 	##TODO: hacer un mediador para el interactablenode
 	if(i.dialogue_emitter):
 		i.dialogue_emitter.start_dialogue()
-		DialogueGlobalEmitter.has_ended.connect(end_interaction)
+		DialogueGlobalEmitter.has_ended.connect(end_dialog)
 		return
 	
 	end_interaction()
@@ -39,10 +42,13 @@ func end_interaction() -> void:
 		inventory.add_item(i.item_node.item_data)
 	
 	interact_detector.current_interactable_node._last_interact()
+	is_interacting = false
+
+func end_dialog(_i : Dialogue) -> void:
+	end_interaction()
+
+func is_touching(_i : InteractableNode) -> void:
 	pass
 
-func is_touching() -> void:
-	pass
-
-func not_touching() -> void:
+func not_touching(_i : InteractableNode) -> void:
 	pass

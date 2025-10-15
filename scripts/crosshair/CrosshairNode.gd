@@ -23,10 +23,10 @@ func turn(state : bool) -> void:
 		hide()
 	on = state
 
-func is_interacting() -> void:
+func is_interacting(_i : InteractableNode) -> void:
 	switch_crosshair(true)
 
-func not_interacting() -> void:
+func not_interacting(_i : InteractableNode) -> void:
 	switch_crosshair(false)
 
 func switch_crosshair(state : bool) -> void:

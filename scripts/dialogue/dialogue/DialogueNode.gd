@@ -73,7 +73,7 @@ func create_dialogue_process(dialogue : Dialogue) -> DialogueProcess:
 	dp.dialogue = dialogue
 	dp.dialogue_length = dp.dialogue.dialogue.size()-1
 	
-	match(dialogue.mode):
+	match(dialogue.dialogue_mode):
 		Dialogue.DialogueMode.BASIC:
 			dp.dialogue_box = DIALOGUE_BASIC_SCENE.instantiate() as BasicBoxUI
 	

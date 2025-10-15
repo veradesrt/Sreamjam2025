@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://c78bdq77ygnhk"]
+[gd_scene load_steps=14 format=3 uid="uid://c78bdq77ygnhk"]
 
 [ext_resource type="PackedScene" uid="uid://bidwu6pvfcasl" path="res://scenes/player/player.tscn" id="1_8wxmh"]
 [ext_resource type="PackedScene" uid="uid://bg7qt4fnwttvq" path="res://scenes/primitives/trigger.tscn" id="2_pwihf"]
 [ext_resource type="PackedScene" uid="uid://kutieyc8oj64" path="res://scenes/primitives/dialogue_emitter_3d.tscn" id="3_gx8es"]
 [ext_resource type="Resource" uid="uid://b7pcjhuuijv50" path="res://resources/dialogue/example.tres" id="4_2avkh"]
 [ext_resource type="Texture2D" uid="uid://dk6ux8aiesioe" path="res://icon.svg" id="6_dlv6v"]
+[ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="6_n56wl"]
+[ext_resource type="Resource" uid="uid://dc35a6vumpdfy" path="res://resources/items/test_item.tres" id="7_n56wl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8wxmh"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -24,6 +26,8 @@ albedo_color = Color(0.32941177, 0.1764706, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6hyye"]
 size = Vector3(5, 5, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dlv6v"]
 
 [node name="main" type="Node3D"]
 
@@ -65,6 +69,25 @@ billboard = 1
 no_depth_test = true
 texture = ExtResource("6_dlv6v")
 
+[node name="Yellow Cube" parent="." instance=ExtResource("6_n56wl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.771843, 2.7983403, 0)
+
+[node name="InteractableNode" parent="Yellow Cube/Components" index="0"]
+interactable_name = "White Cube"
+
+[node name="CollisionShape3D" parent="Yellow Cube/Components/InteractableNode" index="0"]
+shape = SubResource("BoxShape3D_dlv6v")
+
+[node name="DialogueEmitter3D" parent="Yellow Cube/Components" index="1"]
+dialogue = ExtResource("4_2avkh")
+
+[node name="ItemNode" parent="Yellow Cube/Components" index="2"]
+item_data = ExtResource("7_n56wl")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Yellow Cube/Components" index="3"]
+metadata/_edit_lock_ = true
+
 [connection signal="player_entered" from="dialogue_emitter_3d/trigger" to="dialogue_emitter_3d" method="start_dialogue"]
 
 [editable path="dialogue_emitter_3d/trigger"]
+[editable path="Yellow Cube"]
