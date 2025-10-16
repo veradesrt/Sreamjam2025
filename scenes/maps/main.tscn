@@ -82,7 +82,7 @@ size = Vector3(20, 1, 20)
 material = SubResource("StandardMaterial3D_8wxmh")
 
 [node name="player" parent="." instance=ExtResource("1_8wxmh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6859665, 2.1821399, 4.863823)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.159767, 2.182136, -65.71668)
 
 [node name="dialogue_emitter_3d" parent="." instance=ExtResource("3_gx8es")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.556388, 2.8090482, 0)

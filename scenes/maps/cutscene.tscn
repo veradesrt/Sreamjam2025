@@ -1,10 +1,9 @@
-[gd_scene load_steps=48 format=4 uid="uid://dm8k7cg8r2lwo"]
+[gd_scene load_steps=44 format=4 uid="uid://dm8k7cg8r2lwo"]
 
 [ext_resource type="Script" uid="uid://c3smbg67whm0m" path="res://scenes/maps/cutscene.gd" id="1_7nlm1"]
 [ext_resource type="Texture2D" uid="uid://bxus45v6kb04f" path="res://assets/3D models/satara_night_no_lamps_1k.exr" id="2_ohyd1"]
 [ext_resource type="PackedScene" uid="uid://kutieyc8oj64" path="res://scenes/primitives/dialogue_emitter_3d.tscn" id="2_ok5ce"]
-[ext_resource type="Script" uid="uid://jepaqxoulkry" path="res://scripts/dialogue/text/Text.gd" id="3_skdqt"]
-[ext_resource type="Script" uid="uid://d6yrcdl51eli" path="res://scripts/dialogue/dialogue/Dialogue.gd" id="4_tkn67"]
+[ext_resource type="Resource" uid="uid://dikyrsdcjqyns" path="res://resources/cutscene_dialogue/cutscene_1.tres" id="4_1iy4w"]
 [ext_resource type="Script" uid="uid://ya240urtqqhp" path="res://scripts/dialogue/dialogue/DialogueNode.gd" id="5_skdqt"]
 [ext_resource type="Texture2D" uid="uid://ct6wf3lk0fugt" path="res://assets/3D models/cutscene_room_N054.jpg" id="6_18bjg"]
 [ext_resource type="Texture2D" uid="uid://diid5k3b3urb0" path="res://assets/3D models/cutscene_room_wall_256.png" id="7_ohyd1"]
@@ -27,6 +26,21 @@ sky = SubResource("Sky_xvfhp")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="Animation" id="Animation_76bsi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.175, 0.77672166)]
+}
+
 [sub_resource type="Animation" id="Animation_vevy6"]
 resource_name = "headbob"
 length = 2.0
@@ -44,41 +58,11 @@ tracks/0/keys = {
 "values": [Vector3(0, 0.175, 0.77672166), Vector3(0, 0.2, 0.777), Vector3(0, 0.175, 0.77672166)]
 }
 
-[sub_resource type="Animation" id="Animation_76bsi"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0.175, 0.77672166)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_76bsi"]
 _data = {
 &"RESET": SubResource("Animation_76bsi"),
 &"headbob": SubResource("Animation_vevy6")
 }
-
-[sub_resource type="Resource" id="Resource_xea7j"]
-script = ExtResource("3_skdqt")
-content = "test"
-metadata/_custom_type_script = "uid://jepaqxoulkry"
-
-[sub_resource type="Resource" id="Resource_18bjg"]
-script = ExtResource("3_skdqt")
-content = "las test"
-metadata/_custom_type_script = "uid://jepaqxoulkry"
-
-[sub_resource type="Resource" id="Resource_ohyd1"]
-script = ExtResource("4_tkn67")
-dialogue = Array[ExtResource("3_skdqt")]([SubResource("Resource_xea7j"), SubResource("Resource_18bjg")])
-metadata/_custom_type_script = "uid://d6yrcdl51eli"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqdre"]
 resource_name = "ground"
@@ -537,7 +521,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6436487)
 text = "cutscene"
 
 [node name="dialogue_emitter_3d" parent="." instance=ExtResource("2_ok5ce")]
-dialogue = SubResource("Resource_ohyd1")
+dialogue = ExtResource("4_1iy4w")
 
 [node name="DialogueNode" type="Control" parent="."]
 layout_mode = 3

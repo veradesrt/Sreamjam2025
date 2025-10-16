@@ -1,0 +1,65 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=10 format=3 uid="uid://dikyrsdcjqyns"]
+
+[ext_resource type="Script" uid="uid://jepaqxoulkry" path="res://scripts/dialogue/text/Text.gd" id="1_7r7i4"]
+[ext_resource type="Script" uid="uid://d6yrcdl51eli" path="res://scripts/dialogue/dialogue/Dialogue.gd" id="2_2frqa"]
+
+[sub_resource type="Resource" id="Resource_0r8sk"]
+script = ExtResource("1_7r7i4")
+content = "There is this place in Mar del Plata, Argentina, called \"WaterLand\". It was build back during the 80's, at the beginning it used to host all type of services, aquatic games, restaurants, a nightclub, and some hotel styled on the fashion of beach bungalows. It has been long and gone the times where this place used to work as a popular atraccion, 15 long and lonely years for the park.
+What the people visiting the place didn't knew (at least after the place was closed), was that, the whole thing, was built on top of a dump. Before the place started the waterpark construction the company owning the place just dumped a bunch of dirt on top of the trash and called it a day."
+can_auto_skip = true
+typewrite_speed = 0.05
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_ei8c2"]
+script = ExtResource("1_7r7i4")
+content = "At the very beginning the shiny new buildings, never seen before pools, great international cheffs, and the usual visit from famous artists and celebrities made the place a hotspot for tourism. A year, a year was all the time it took for everything to start falling apart, the foundations of the place started cracking, pools leaking, the constant repair and upkeep kept some of the atractions \"out of order\". But ! This wasn't even the worst part, because what really started putting people off, was the smell. The rotting, putrid, gut wrentching smell that started to erupt from every hole, pipe, crack and gap from the deeply hidden trash under the entire park, that at this point was even deeper decomposition state, all of these gases being kept under, had no space to expand so they ascended into the park, the pools started to lightly bubble, the madness of the situation was even affecting the plants, for the palm trees, if listen closely would talk(they were actually just emitting a low hiss from the gas leak)."
+can_auto_skip = true
+typewrite_speed = 0.05
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_26e6d"]
+script = ExtResource("1_7r7i4")
+content = "The first ever explosion happend a year and a half after the grand opening, a middle aged man was taking a smoke close to a water filter by the pool, when some embers from the cigarette ignited the gas leaking from the pumping system, the boom . . . bah it can't even be called that, it was almost harmless, it only destroyed his smoke and gave him a good scare, nothing more than those little prank smokes they sell that would explode when lit. But everyone present at the place kind off knew that what had happens wasn't quite right. From there on the complaints started flowing, complaints that the PR team knew how to calm with discounts and free stays at the bungalows. "
+can_auto_skip = true
+typewrite_speed = 0.05
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_57j8p"]
+script = ExtResource("1_7r7i4")
+content = "Or that was until in the early 90's an explosion was strong enough to kill a small child that was playing near the restaurant, by the bathrooms. For the unfortunate guest at the dinner, the place had a big beautiful window overlooking the pools, that also gave them a good look of the accident.
+The police that after that looked the other way, no doubt, tempted by the bribes, had now no more options but to close down the place. . .
+From then on, the place suffered from an increased state of dissarray and decrepitude, the pools now empty, cracked like drougth dirt, seem to paint the shadowy silhouette of every person that ever set foot on its waters, now only accompanied by the mossy hairs outgrouwn in the sad pools."
+can_auto_skip = true
+typewrite_speed = 0.05
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_8f3br"]
+script = ExtResource("1_7r7i4")
+content = "A part of the old nightclub roof collapsed at one point, and the nights intensly charged with \"spiritual energy\", strong colored lights seem to cry out of the collapsed ceiling, only for them to be abruptly cut by inhuman screams -or at least, that's what the locals claim.
+The restaurant is no better, it is perpetually inundated by an intense odor of death(some even claim to hear the cries of little children).
+Lastly the creaking water slides and decorative towers now imitate one of the most famous italian buildings, inclined in all directions, while the wind that runs thru them sings all kinds of tones and semitones, threatening to collapse the whole thing at any point."
+can_auto_skip = true
+typewrite_speed = 0.05
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_ur1bt"]
+script = ExtResource("1_7r7i4")
+content = "BUT ! this October of 200x is going to be very different ~.~ Indeed ethernauts. From the \"GRITOS\" forum, we prepared a little prop hunt, for those who dare, to visit the cursed place.
+THE organizers (and yours truly) will be leaving 6 (six) objects that you must find. you might ask ¿Why would i ever do that? BeCauSe ! . ! We have a price, a lil surprise for those brave enough to take the challenge. you only need to explore the place this thursday 12pm onwards (the objects will be hidden shortly after, so don't try to cheat going at day time :P). When all the items are found you must deposit them in a box that is going to be waiting at \"Jorge Luis Borges\" street. Dont forget ! the box has a small paper and a pen, there u have to put your forum's user name (so we know who won the contest)"
+can_auto_skip = true
+typewrite_speed = 0.05
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_etv7d"]
+script = ExtResource("1_7r7i4")
+content = "Editor's note: I forgor to mention, at the entrance we left a another paper for those who want to participate, you need to, again, put your forum name. and yes, you need to do it twice or it wont count. (Dont come at us later saying you weren't warned!)
+Good luck. with. The. Hunt. X.x"
+can_auto_skip = true
+typewrite_speed = 0.05
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[resource]
+script = ExtResource("2_2frqa")
+dialogue = Array[ExtResource("1_7r7i4")]([SubResource("Resource_0r8sk"), SubResource("Resource_ei8c2"), SubResource("Resource_26e6d"), SubResource("Resource_57j8p"), SubResource("Resource_8f3br"), SubResource("Resource_ur1bt"), SubResource("Resource_etv7d")])
+metadata/_custom_type_script = "uid://d6yrcdl51eli"
