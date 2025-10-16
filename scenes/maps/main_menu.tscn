@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cm5fdk81bqipp"]
+[gd_scene load_steps=5 format=3 uid="uid://cm5fdk81bqipp"]
 
 [ext_resource type="Script" uid="uid://b6x1btd1tema1" path="res://scenes/maps/main_menu.gd" id="1_4rqo4"]
+[ext_resource type="AudioStream" uid="uid://ygpj0fecjohk" path="res://assets/ui_sounds/Button Hover.mp3" id="2_djnby"]
+[ext_resource type="AudioStream" uid="uid://cypcud4iwrv5d" path="res://assets/ui_sounds/Button Menu Press.mp3" id="3_rwcdj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4rqo4"]
 bg_color = Color(0.13028675, 0.13028681, 0.1302867, 1)
@@ -225,7 +227,28 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Close & Save"
 
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 30.0
+offset_right = 131.0
+offset_bottom = 53.0
+text = "GAME NAME"
+
+[node name="hover_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_djnby")
+volume_db = -12.0
+
+[node name="click_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rwcdj")
+volume_db = -12.0
+
+[connection signal="mouse_entered" from="UI/VBoxContainer/play" to="." method="on_hover_sound"]
 [connection signal="pressed" from="UI/VBoxContainer/play" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="UI/VBoxContainer/settings" to="." method="on_hover_sound"]
 [connection signal="pressed" from="UI/VBoxContainer/settings" to="." method="_on_settings_pressed"]
+[connection signal="mouse_entered" from="UI/VBoxContainer/credits" to="." method="on_hover_sound"]
 [connection signal="pressed" from="UI/VBoxContainer/credits" to="." method="_on_credits_pressed"]
+[connection signal="mouse_entered" from="UI/VBoxContainer/exit" to="." method="on_hover_sound"]
 [connection signal="pressed" from="UI/VBoxContainer/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="UI/options/Panel/close" to="." method="_on_close_options_pressed"]

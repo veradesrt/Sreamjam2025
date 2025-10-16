@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cypcud4iwrv5d"
+path="res://.godot/imported/Button Menu Press.mp3-fbf6995e682c7d420ce4473e71447c27.mp3str"
+
+[deps]
+
+source_file="res://assets/ui_sounds/Button Menu Press.mp3"
+dest_files=["res://.godot/imported/Button Menu Press.mp3-fbf6995e682c7d420ce4473e71447c27.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

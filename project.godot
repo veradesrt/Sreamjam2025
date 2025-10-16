@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ScreamJam2025"
-run/main_scene="uid://c78bdq77ygnhk"
+run/main_scene="uid://cm5fdk81bqipp"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 "<<<<<<<HEAD[autoload]DialogueGlobalEmitter"="*res://scripts/dialogue/dialogue/DialogueGlobalEmitter.gd"

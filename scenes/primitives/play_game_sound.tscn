@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6hyllgphumlx"]
+
+[ext_resource type="AudioStream" uid="uid://dumuu2q8llmd8" path="res://assets/ui_sounds/Button Press.mp3" id="1_riokv"]
+
+[node name="play_sound" type="AudioStreamPlayer"]
+stream = ExtResource("1_riokv")
+volume_db = -12.0
+bus = &"SFX"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c78bdq77ygnhk"]
+[gd_scene load_steps=21 format=3 uid="uid://c78bdq77ygnhk"]
 
 [ext_resource type="PackedScene" uid="uid://bidwu6pvfcasl" path="res://scenes/player/player.tscn" id="1_8wxmh"]
 [ext_resource type="Texture2D" uid="uid://bxus45v6kb04f" path="res://assets/3D models/satara_night_no_lamps_1k.exr" id="1_dlv6v"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://5vol0c1sctto" path="res://scripts/interactable/InteractableNode.gd" id="3_6hyye"]
 [ext_resource type="PackedScene" uid="uid://kutieyc8oj64" path="res://scenes/primitives/dialogue_emitter_3d.tscn" id="3_gx8es"]
 [ext_resource type="Resource" uid="uid://b7pcjhuuijv50" path="res://resources/dialogue/example.tres" id="4_2avkh"]
+[ext_resource type="AudioStream" uid="uid://dawqgldlgl1gp" path="res://assets/ambiance_sound/Wind Blowing.mp3" id="7_n56wl"]
+[ext_resource type="PackedScene" uid="uid://cyhw4djxhh3ko" path="res://scenes/buildings/disco.tscn" id="8_m6k0o"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_n56wl"]
 rayleigh_coefficient = 5.94
@@ -72,7 +74,7 @@ size = Vector3(20, 1, 20)
 material = SubResource("StandardMaterial3D_8wxmh")
 
 [node name="player" parent="." instance=ExtResource("1_8wxmh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9711571, 2.1821399, 10.195766)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6859665, 2.1821399, 4.863823)
 
 [node name="dialogue_emitter_3d" parent="." instance=ExtResource("3_gx8es")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.556388, 2.8090482, 0)
@@ -435,6 +437,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.7048926, 1.8823624)
 pixel_size = 0.01
 text = "water slide"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_n56wl")
+volume_db = -6.0
+autoplay = true
+
+[node name="Node3D" parent="." instance=ExtResource("8_m6k0o")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -52.671394, 0.6015663, -68.28954)
+
+[node name="ground" parent="Node3D" index="1" groups=["concrete"]]
+
 [connection signal="player_entered" from="dialogue_emitter_3d/trigger" to="dialogue_emitter_3d" method="start_dialogue"]
 
 [editable path="dialogue_emitter_3d/trigger"]
+[editable path="Node3D"]
