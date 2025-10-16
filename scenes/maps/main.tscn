@@ -86,7 +86,7 @@ size = Vector3(20, 1, 20)
 material = SubResource("StandardMaterial3D_8wxmh")
 
 [node name="player" parent="." instance=ExtResource("1_8wxmh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.246529, 2.182136, 1.6328344)
+transform = Transform3D(0.40758154, 0, -0.91316885, 0, 1, 0, 0.91316885, 0, 0.40758154, 44.960407, 1.2885408, -92.50512)
 
 [node name="dialogue_emitter_3d" parent="." instance=ExtResource("3_gx8es")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.556388, 2.8090482, 9.438675)
@@ -459,11 +459,13 @@ bus = &"Ambience"
 [node name="scream_jam_all" parent="." instance=ExtResource("8_m6k0o")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -38.820305, 0, -60.38613)
 
-[node name="ground" parent="scream_jam_all" index="0" groups=["dirt"]]
+[node name="bar2" parent="scream_jam_all" index="0" groups=["concrete"]]
 
-[node name="bridge" parent="scream_jam_all" index="1" groups=["concrete"]]
+[node name="ground" parent="scream_jam_all" index="3" groups=["dirt"]]
 
-[node name="tower" parent="scream_jam_all" index="2" groups=["concrete"]]
+[node name="bridge" parent="scream_jam_all" index="4" groups=["concrete"]]
+
+[node name="tower" parent="scream_jam_all" index="5" groups=["concrete"]]
 
 [node name="trigger" parent="." instance=ExtResource("2_pwihf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6534462, 3.6004443, -45.53076)
