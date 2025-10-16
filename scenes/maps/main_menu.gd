@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var options: Control = $UI/options
+@onready var credits: Control = $UI/credits
 
 @onready var hover_sound: AudioStreamPlayer = $hover_sound
 @onready var click_sound: AudioStreamPlayer = $click_sound
@@ -32,6 +33,7 @@ func _on_exit_pressed() -> void:
 func _on_credits_pressed() -> void:
 	click_sound.pitch_scale = 1
 	click_sound.play()
+	credits.visible=true
 
 func enable_options_menu():
 	options.visible = true
@@ -41,8 +43,12 @@ func disable_options_menu():
 func on_hover_sound()->void:
 	hover_sound.play()
 
-
 func _on_close_options_pressed() -> void:
 	click_sound.pitch_scale = 0.5
 	click_sound.play()
 	disable_options_menu()
+
+func _on_close_credits_pressed() -> void:
+	click_sound.pitch_scale = 0.5
+	click_sound.play()
+	credits.visible=false
