@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c78bdq77ygnhk"]
+[gd_scene load_steps=23 format=3 uid="uid://c78bdq77ygnhk"]
 
 [ext_resource type="PackedScene" uid="uid://bidwu6pvfcasl" path="res://scenes/player/player.tscn" id="1_8wxmh"]
 [ext_resource type="Texture2D" uid="uid://bxus45v6kb04f" path="res://assets/3D models/satara_night_no_lamps_1k.exr" id="1_dlv6v"]
@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://kutieyc8oj64" path="res://scenes/primitives/dialogue_emitter_3d.tscn" id="3_gx8es"]
 [ext_resource type="Resource" uid="uid://b7pcjhuuijv50" path="res://resources/dialogue/example.tres" id="4_2avkh"]
 [ext_resource type="AudioStream" uid="uid://die23ti0nyo30" path="res://assets/ambiance_sound/Wind Blowing Fade Out.mp3" id="7_m6k0o"]
-[ext_resource type="PackedScene" uid="uid://cyhw4djxhh3ko" path="res://scenes/buildings/disco.tscn" id="8_m6k0o"]
+[ext_resource type="PackedScene" uid="uid://clref3a7bfd5l" path="res://scenes/buildings/main_level.tscn" id="8_m6k0o"]
+[ext_resource type="AudioStream" uid="uid://c47vd0q7ljhat" path="res://assets/ambiance_sound/Wind Howling.wav" id="9_ss43a"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_n56wl"]
 rayleigh_coefficient = 5.94
@@ -60,6 +61,9 @@ albedo_color = Color(1, 1, 1, 0.61960787)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ss43a"]
 albedo_color = Color(0, 0.5568628, 1, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ss43a"]
+size = Vector3(5.7037697, 4.18, 7.325)
+
 [node name="main" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -71,21 +75,21 @@ shadow_enabled = true
 sky_mode = 2
 
 [node name="concrete_ground" type="CSGBox3D" parent="." groups=["concrete"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30.392406)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40.28438)
 use_collision = true
 size = Vector3(20, 1, 20)
 
 [node name="dirt_ground" type="CSGBox3D" parent="." groups=["dirt"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07369423, 0, 10.511677)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07369423, 0, 20.403652)
 use_collision = true
 size = Vector3(20, 1, 20)
 material = SubResource("StandardMaterial3D_8wxmh")
 
 [node name="player" parent="." instance=ExtResource("1_8wxmh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.159767, 2.182136, -65.71668)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.246529, 2.182136, 1.6328344)
 
 [node name="dialogue_emitter_3d" parent="." instance=ExtResource("3_gx8es")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.556388, 2.8090482, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.556388, 2.8090482, 9.438675)
 dialogue = ExtResource("4_2avkh")
 
 [node name="trigger" parent="dialogue_emitter_3d" instance=ExtResource("2_pwihf")]
@@ -108,7 +112,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0014953613)
 shape = SubResource("BoxShape3D_2avkh")
 
 [node name="blockout" type="CSGBox3D" parent="." groups=["concrete"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52350235, 0, -63.925903)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52350235, -54.35317, -63.925903)
+visible = false
 use_collision = true
 size = Vector3(120.877846, 1, 128.8518)
 
@@ -451,12 +456,28 @@ volume_db = -6.0
 autoplay = true
 bus = &"Ambience"
 
-[node name="Node3D" parent="." instance=ExtResource("8_m6k0o")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -52.671394, 0.6015663, -68.28954)
+[node name="scream_jam_all" parent="." instance=ExtResource("8_m6k0o")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -38.820305, 0, -60.38613)
 
-[node name="ground" parent="Node3D" index="1" groups=["concrete"]]
+[node name="ground" parent="scream_jam_all" index="0" groups=["dirt"]]
+
+[node name="bridge" parent="scream_jam_all" index="1" groups=["concrete"]]
+
+[node name="tower" parent="scream_jam_all" index="2" groups=["concrete"]]
+
+[node name="trigger" parent="." instance=ExtResource("2_pwihf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6534462, 3.6004443, -45.53076)
+
+[node name="CollisionShape3D" parent="trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6368849, 0, 0)
+shape = SubResource("BoxShape3D_ss43a")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="trigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.152661, 0)
+stream = ExtResource("9_ss43a")
 
 [connection signal="player_entered" from="dialogue_emitter_3d/trigger" to="dialogue_emitter_3d" method="start_dialogue"]
 
 [editable path="dialogue_emitter_3d/trigger"]
-[editable path="Node3D"]
+[editable path="scream_jam_all"]
+[editable path="trigger"]
