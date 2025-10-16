@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://5vol0c1sctto" path="res://scripts/interactable/InteractableNode.gd" id="3_6hyye"]
 [ext_resource type="PackedScene" uid="uid://kutieyc8oj64" path="res://scenes/primitives/dialogue_emitter_3d.tscn" id="3_gx8es"]
 [ext_resource type="Resource" uid="uid://b7pcjhuuijv50" path="res://resources/dialogue/example.tres" id="4_2avkh"]
-[ext_resource type="AudioStream" uid="uid://dawqgldlgl1gp" path="res://assets/ambiance_sound/Wind Blowing.mp3" id="7_n56wl"]
+[ext_resource type="AudioStream" uid="uid://die23ti0nyo30" path="res://assets/ambiance_sound/Wind Blowing Fade Out.mp3" id="7_m6k0o"]
 [ext_resource type="PackedScene" uid="uid://cyhw4djxhh3ko" path="res://scenes/buildings/disco.tscn" id="8_m6k0o"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_n56wl"]
@@ -23,6 +23,14 @@ background_energy_multiplier = 0.56
 sky = SubResource("Sky_pwihf")
 tonemap_mode = 2
 glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_density = 1.0
+fog_aerial_perspective = 0.752
+fog_height = 2.0
+fog_height_density = 0.2
+fog_depth_curve = 0.90124935
+fog_depth_begin = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8wxmh"]
 albedo_color = Color(0.32941177, 0.1764706, 0, 1)
@@ -438,9 +446,10 @@ pixel_size = 0.01
 text = "water slide"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_n56wl")
+stream = ExtResource("7_m6k0o")
 volume_db = -6.0
 autoplay = true
+bus = &"Ambience"
 
 [node name="Node3D" parent="." instance=ExtResource("8_m6k0o")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -52.671394, 0.6015663, -68.28954)

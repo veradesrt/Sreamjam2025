@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://csjh47724s3kp"
+path="res://.godot/imported/Footsteps Approaching.mp3-5070899344ac2b1482d4bce76ee4ee96.mp3str"
+
+[deps]
+
+source_file="res://assets/Footsteps Approaching.mp3"
+dest_files=["res://.godot/imported/Footsteps Approaching.mp3-5070899344ac2b1482d4bce76ee4ee96.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

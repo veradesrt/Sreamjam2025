@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bypvur6b8jusv"
+path="res://.godot/imported/Water Slide.mp3-330916d527765d650fe3cf2cca49c4cb.mp3str"
+
+[deps]
+
+source_file="res://assets/Water Slide.mp3"
+dest_files=["res://.godot/imported/Water Slide.mp3-330916d527765d650fe3cf2cca49c4cb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cm5fdk81bqipp"]
+[gd_scene load_steps=6 format=3 uid="uid://cm5fdk81bqipp"]
 
 [ext_resource type="Script" uid="uid://b6x1btd1tema1" path="res://scenes/maps/main_menu.gd" id="1_4rqo4"]
 [ext_resource type="AudioStream" uid="uid://ygpj0fecjohk" path="res://assets/ui_sounds/Button Hover.mp3" id="2_djnby"]
 [ext_resource type="AudioStream" uid="uid://cypcud4iwrv5d" path="res://assets/ui_sounds/Button Menu Press.mp3" id="3_rwcdj"]
+[ext_resource type="AudioStream" uid="uid://dydb6nc63brbd" path="res://assets/ambiance_sound/SJ 25 Track 1_looped.ogg" id="4_djnby"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4rqo4"]
 bg_color = Color(0.13028675, 0.13028681, 0.1302867, 1)
@@ -303,10 +304,18 @@ text = "GAME NAME"
 [node name="hover_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_djnby")
 volume_db = -12.0
+bus = &"SFX"
 
 [node name="click_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_rwcdj")
 volume_db = -12.0
+bus = &"SFX"
+
+[node name="bg_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_djnby")
+volume_db = -3.0
+autoplay = true
+bus = &"Ambience"
 
 [connection signal="mouse_entered" from="UI/VBoxContainer/play" to="." method="on_hover_sound"]
 [connection signal="pressed" from="UI/VBoxContainer/play" to="." method="_on_play_pressed"]
