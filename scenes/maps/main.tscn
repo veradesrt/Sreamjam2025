@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://c78bdq77ygnhk"]
+[gd_scene load_steps=13 format=3 uid="uid://c78bdq77ygnhk"]
 
 [ext_resource type="PackedScene" uid="uid://bidwu6pvfcasl" path="res://scenes/player/player.tscn" id="1_8wxmh"]
 [ext_resource type="PackedScene" uid="uid://bg7qt4fnwttvq" path="res://scenes/primitives/trigger.tscn" id="2_pwihf"]
 [ext_resource type="PackedScene" uid="uid://kutieyc8oj64" path="res://scenes/primitives/dialogue_emitter_3d.tscn" id="3_gx8es"]
 [ext_resource type="Resource" uid="uid://b7pcjhuuijv50" path="res://resources/dialogue/example.tres" id="4_2avkh"]
-[ext_resource type="Texture2D" uid="uid://dk6ux8aiesioe" path="res://icon.svg" id="6_dlv6v"]
 [ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="6_n56wl"]
 [ext_resource type="Resource" uid="uid://dc35a6vumpdfy" path="res://resources/items/test_item.tres" id="7_n56wl"]
 
@@ -52,22 +51,13 @@ material = SubResource("StandardMaterial3D_8wxmh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.516809, 2.1821399, 0)
 
 [node name="dialogue_emitter_3d" parent="." instance=ExtResource("3_gx8es")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.556388, 2.8090482, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.556388, 2.8090482, 14.980329)
 dialogue = ExtResource("4_2avkh")
 
 [node name="trigger" parent="dialogue_emitter_3d" instance=ExtResource("2_pwihf")]
 
 [node name="CollisionShape3D" parent="dialogue_emitter_3d/trigger" index="0"]
 shape = SubResource("BoxShape3D_6hyye")
-
-[node name="interactable_test" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-visibility_range_end = 10.0
-visibility_range_end_margin = 3.0
-visibility_range_fade_mode = 1
-billboard = 1
-no_depth_test = true
-texture = ExtResource("6_dlv6v")
 
 [node name="Yellow Cube" parent="." instance=ExtResource("6_n56wl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.771843, 2.7983403, 0)

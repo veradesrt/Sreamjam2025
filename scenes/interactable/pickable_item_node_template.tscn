@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://degcaoi7fvmio"]
+[gd_scene load_steps=6 format=3 uid="uid://degcaoi7fvmio"]
 
 [ext_resource type="Script" uid="uid://cha0u0v62k2uo" path="res://scripts/items/PickableItemNode.gd" id="1_jmwnx"]
 [ext_resource type="Script" uid="uid://5vol0c1sctto" path="res://scripts/interactable/InteractableNode.gd" id="2_sgili"]
 [ext_resource type="Script" uid="uid://dxtlwx2f15ra1" path="res://scenes/primitives/dialogue_emitter_3d.gd" id="3_t2h84"]
+[ext_resource type="Texture2D" uid="uid://ddyngtad3sfyb" path="res://assets/grab2.png" id="5_n1686"]
 [ext_resource type="Script" uid="uid://bemc6huvq4fei" path="res://scripts/items/ItemNode.gd" id="5_wrqbn"]
 
 [node name="PickableItemNode" type="Node3D"]
@@ -11,10 +12,11 @@ script = ExtResource("1_jmwnx")
 [node name="Components" type="Node3D" parent="."]
 metadata/_edit_lock_ = true
 
-[node name="InteractableNode" type="Area3D" parent="Components" node_paths=PackedStringArray("dialogue_emitter", "item_node")]
+[node name="InteractableNode" type="Area3D" parent="Components" node_paths=PackedStringArray("dialogue_emitter", "item_node", "interactealbe_highlight")]
 script = ExtResource("2_sgili")
 dialogue_emitter = NodePath("../DialogueEmitter3D")
 item_node = NodePath("../ItemNode")
+interactealbe_highlight = NodePath("../../interactable_test")
 metadata/_custom_type_script = "uid://5vol0c1sctto"
 metadata/_edit_lock_ = true
 
@@ -28,3 +30,14 @@ metadata/_edit_lock_ = true
 [node name="ItemNode" type="Node" parent="Components"]
 script = ExtResource("5_wrqbn")
 metadata/_custom_type_script = "uid://bemc6huvq4fei"
+
+[node name="interactable_test" type="Sprite3D" parent="."]
+visibility_range_end = 10.0
+visibility_range_end_margin = 3.0
+visibility_range_fade_mode = 1
+billboard = 1
+double_sided = false
+no_depth_test = true
+alpha_cut = 1
+alpha_scissor_threshold = 1.0
+texture = ExtResource("5_n1686")

@@ -7,6 +7,7 @@ extends Area3D
 @export_group("Components")
 @export var dialogue_emitter : DialogueEmitter3D
 @export var item_node : ItemNode
+@export var interactealbe_highlight: Sprite3D
 
 signal first_interact()
 signal last_interact()
@@ -16,6 +17,7 @@ signal out_of_contact()
 func _enter_tree() -> void:
 	set_collision_layer_value(1,false)
 	set_collision_layer_value(4,true)
+	interactealbe_highlight.visible = false
 	monitoring = false
 	switch(is_on)
 
@@ -35,3 +37,4 @@ func _out_of_contact() -> void:
 
 func switch(state : bool) -> void:
 	monitorable = state
+	interactealbe_highlight.visible = state
