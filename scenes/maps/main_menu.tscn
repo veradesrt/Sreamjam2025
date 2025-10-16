@@ -1,10 +1,73 @@
-[gd_scene load_steps=7 format=3 uid="uid://cm5fdk81bqipp"]
+[gd_scene load_steps=11 format=3 uid="uid://cm5fdk81bqipp"]
 
 [ext_resource type="Script" uid="uid://b6x1btd1tema1" path="res://scenes/maps/main_menu.gd" id="1_4rqo4"]
 [ext_resource type="AudioStream" uid="uid://ygpj0fecjohk" path="res://assets/ui_sounds/Button Hover.mp3" id="2_djnby"]
 [ext_resource type="PackedScene" uid="uid://casdggffaussy" path="res://scenes/player/fade_system.tscn" id="2_rwcdj"]
 [ext_resource type="AudioStream" uid="uid://cypcud4iwrv5d" path="res://assets/ui_sounds/Button Menu Press.mp3" id="3_rwcdj"]
 [ext_resource type="AudioStream" uid="uid://dydb6nc63brbd" path="res://assets/ambiance_sound/SJ 25 Track 1_looped.ogg" id="4_djnby"]
+[ext_resource type="PackedScene" uid="uid://clref3a7bfd5l" path="res://scenes/buildings/main_level.tscn" id="6_awsrp"]
+
+[sub_resource type="Animation" id="Animation_awsrp"]
+resource_name = "head_bob"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.0333333, 5.9666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.7658081, 1.9157447, 3.0362234), Vector3(-0.766, 1.796, 3.036), Vector3(-0.7658081, 1.9157447, 3.0362234)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.023333, 5.9666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.36151004, 0), Vector3(-0.05235988, -0.36128315, 0), Vector3(0, -0.36151004, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0sxhj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.7658081, 1.9157447, 3.0362234)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.36151004, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2gck5"]
+_data = {
+&"RESET": SubResource("Animation_0sxhj"),
+&"head_bob": SubResource("Animation_awsrp")
+}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4rqo4"]
 bg_color = Color(0.13028675, 0.13028681, 0.1302867, 1)
@@ -13,7 +76,13 @@ bg_color = Color(0.13028675, 0.13028681, 0.1302867, 1)
 script = ExtResource("1_4rqo4")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65632474, 0.8528051)
+transform = Transform3D(0.9353638, 0, -0.35368708, 0, 1, 0, 0.35368708, 0, 0.9353638, -0.7658081, 1.9157447, 3.0362234)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
+libraries = {
+&"": SubResource("AnimationLibrary_2gck5")
+}
+autoplay = "head_bob"
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -303,6 +372,7 @@ offset_bottom = 53.0
 text = "GAME NAME"
 
 [node name="fade_system" parent="UI" instance=ExtResource("2_rwcdj")]
+visible = false
 layout_mode = 1
 
 [node name="hover_sound" type="AudioStreamPlayer" parent="."]
@@ -321,6 +391,9 @@ volume_db = -3.0
 autoplay = true
 bus = &"Ambience"
 
+[node name="scream_jam_all" parent="." instance=ExtResource("6_awsrp")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -48.59701, 0, -62.896534)
+
 [connection signal="mouse_entered" from="UI/VBoxContainer/play" to="." method="on_hover_sound"]
 [connection signal="pressed" from="UI/VBoxContainer/play" to="." method="_on_play_pressed"]
 [connection signal="mouse_entered" from="UI/VBoxContainer/settings" to="." method="on_hover_sound"]
@@ -331,3 +404,5 @@ bus = &"Ambience"
 [connection signal="pressed" from="UI/VBoxContainer/exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="UI/options/Panel/close" to="." method="_on_close_options_pressed"]
 [connection signal="pressed" from="UI/credits/Panel/close" to="." method="_on_close_credits_pressed"]
+
+[editable path="scream_jam_all"]
