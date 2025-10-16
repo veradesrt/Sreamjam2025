@@ -4,30 +4,42 @@ extends Area3D
 @export var is_on : bool = true
 @export var interactable_name : String = "Object"
 
-signal interact()
+@export_group("Components")
+@export var dialogue_emitter : DialogueEmitter3D
+@export var item_node : ItemNode
+@export var interactealbe_highlight: Sprite3D
+
+signal first_interact()
+signal last_interact()
 signal on_contact()
 signal out_of_contact()
 
 func _enter_tree() -> void:
 	set_collision_layer_value(1,false)
 	set_collision_layer_value(4,true)
-	interact.connect(_interact)
-	on_contact.connect(_on_contact)
-	out_of_contact.connect(_out_of_contact)
+	interactealbe_highlight.visible = false
 	monitoring = false
 	switch(is_on)
+	print(monitoring)
 
-func _interact() -> void:
-	print("interact")
-	pass
+func _first_interact() -> void:
+	first_interact.emit()
+
+func _last_interact() -> void:
+	last_interact.emit()
 
 func _on_contact() -> void:
 	print("on_contact")
-	pass
+	on_contact.emit()
 
 func _out_of_contact() -> void:
 	print("out_of_contact")
-	pass
+	out_of_contact.emit()
 
 func switch(state : bool) -> void:
+	if(state):
+		set_collision_layer_value(4,true)
+	else:
+		set_collision_layer_value(4,false)
 	monitorable = state
+	interactealbe_highlight.visible = state

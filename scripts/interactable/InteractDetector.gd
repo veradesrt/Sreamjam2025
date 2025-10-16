@@ -11,8 +11,8 @@ extends Node3D
 
 var current_interactable_node : InteractableNode
 
-signal is_touching
-signal not_touching
+signal is_touching(i : InteractableNode)
+signal not_touching(i : InteractableNode)
 
 var current_state_touching : bool = false
 var previous_state_touching : bool = false
@@ -27,15 +27,17 @@ func _process(delta: float) -> void:
 	else:
 		current_state_touching = false
 	
-	
 	if(current_state_touching != previous_state_touching):
 		if(current_state_touching):
 			current_interactable_node = ray_cast.get_collider() as InteractableNode
-			is_touching.emit()
-			current_interactable_node.on_contact.emit()
+			is_touching.emit(current_interactable_node)
+			current_interactable_node._on_contact()
 		else:
-			not_touching.emit()
-			current_interactable_node.out_of_contact.emit()
+			if(current_interactable_node != null):
+				not_touching.emit(current_interactable_node)
+				current_interactable_node._out_of_contact()
+			else:
+				not_touching.emit(null)
 			current_interactable_node = null
 			label_name.hide()
 		
@@ -44,6 +46,3 @@ func _process(delta: float) -> void:
 			label_name.show()
 			
 		previous_state_touching = current_state_touching
-	
-	if(Input.is_action_just_pressed("enter") and current_state_touching):
-		current_interactable_node.interact.emit()
