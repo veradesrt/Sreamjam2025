@@ -73,7 +73,7 @@ func _on_options_pressed() -> void:
 	open_options()
 
 func _on_exit_pressed() -> void:
-	pass # Replace with function body.
+	SceneChanger.request_scene_change("main_menu")
 
 func _on_mouse_sensitivity_value_changed(value: float) -> void:
 	local_mouse_sens = value

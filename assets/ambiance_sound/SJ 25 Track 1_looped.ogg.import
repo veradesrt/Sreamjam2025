@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dydb6nc63brbd"
+path="res://.godot/imported/SJ 25 Track 1_looped.ogg-5d9e04932eeaadf6a0166380e9308449.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/ambiance_sound/SJ 25 Track 1_looped.ogg"
+dest_files=["res://.godot/imported/SJ 25 Track 1_looped.ogg-5d9e04932eeaadf6a0166380e9308449.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

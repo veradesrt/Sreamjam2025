@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ScreamJam2025"
-run/main_scene="uid://c78bdq77ygnhk"
+run/main_scene="uid://cm5fdk81bqipp"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 "<<<<<<<HEAD[autoload]DialogueGlobalEmitter"="*res://scripts/dialogue/dialogue/DialogueGlobalEmitter.gd"
@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 
 DialogueGlobalEmitter="*res://scripts/dialogue/dialogue/DialogueGlobalEmitter.gd"
 PlayerData="*res://scripts/player_singleton/player_data.gd"
+SceneChanger="*res://scripts/scene_changer.gd"
 
 [debug]
 
@@ -28,6 +29,7 @@ gdscript/warnings/unassigned_variable=2
 [display]
 
 window/size/resizable=false
+window/stretch/mode="viewport"
 
 [global_group]
 

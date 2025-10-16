@@ -12,6 +12,7 @@ class_name Player
 
 @onready var main_menu: Control = $UI
 
+@onready var fade_system: fade_screen_system = $UI/fade_system
 @onready var movement_configuration: MovementConfiguration = $MovementConfiguration
 
 @onready var inventory_node: InventoryNode = $InventoryNode
@@ -28,6 +29,9 @@ func _ready() -> void:
 	change_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	mouse_sens = PlayerData.get_mouse_sensitivity()
 	PlayerData.mouse_sens_changed.connect(change_mouse_sens)
+	
+	fade_system.force_set_screen_to_black()
+	fade_system.fade_from_black_to_clear()
 
 ## function used to change the mouse mode from a single place
 func change_mouse_mode(new_mode):
