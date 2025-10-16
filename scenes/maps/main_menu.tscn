@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cm5fdk81bqipp"]
+[gd_scene load_steps=7 format=3 uid="uid://cm5fdk81bqipp"]
 
 [ext_resource type="Script" uid="uid://b6x1btd1tema1" path="res://scenes/maps/main_menu.gd" id="1_4rqo4"]
 [ext_resource type="AudioStream" uid="uid://ygpj0fecjohk" path="res://assets/ui_sounds/Button Hover.mp3" id="2_djnby"]
+[ext_resource type="PackedScene" uid="uid://casdggffaussy" path="res://scenes/player/fade_system.tscn" id="2_rwcdj"]
 [ext_resource type="AudioStream" uid="uid://cypcud4iwrv5d" path="res://assets/ui_sounds/Button Menu Press.mp3" id="3_rwcdj"]
 [ext_resource type="AudioStream" uid="uid://dydb6nc63brbd" path="res://assets/ambiance_sound/SJ 25 Track 1_looped.ogg" id="4_djnby"]
 
@@ -300,6 +301,9 @@ offset_top = 30.0
 offset_right = 131.0
 offset_bottom = 53.0
 text = "GAME NAME"
+
+[node name="fade_system" parent="UI" instance=ExtResource("2_rwcdj")]
+layout_mode = 1
 
 [node name="hover_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_djnby")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://dm8k7cg8r2lwo"]
+[gd_scene load_steps=45 format=4 uid="uid://dm8k7cg8r2lwo"]
 
 [ext_resource type="Script" uid="uid://c3smbg67whm0m" path="res://scenes/maps/cutscene.gd" id="1_7nlm1"]
 [ext_resource type="Texture2D" uid="uid://bxus45v6kb04f" path="res://assets/3D models/satara_night_no_lamps_1k.exr" id="2_ohyd1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://dikyrsdcjqyns" path="res://resources/cutscene_dialogue/cutscene_1.tres" id="4_1iy4w"]
 [ext_resource type="Script" uid="uid://ya240urtqqhp" path="res://scripts/dialogue/dialogue/DialogueNode.gd" id="5_skdqt"]
 [ext_resource type="Texture2D" uid="uid://ct6wf3lk0fugt" path="res://assets/3D models/cutscene_room_N054.jpg" id="6_18bjg"]
+[ext_resource type="PackedScene" uid="uid://casdggffaussy" path="res://scenes/player/fade_system.tscn" id="6_vevy6"]
 [ext_resource type="Texture2D" uid="uid://diid5k3b3urb0" path="res://assets/3D models/cutscene_room_wall_256.png" id="7_ohyd1"]
 [ext_resource type="Texture2D" uid="uid://vax1db2u2w4p" path="res://assets/3D models/cutscene_room_logs195.jpg" id="8_tqyou"]
 [ext_resource type="Texture2D" uid="uid://b6seub8j0rjj7" path="res://assets/3D models/cutscene_room_props_crtBack256.jpg" id="10_vevy6"]
@@ -533,6 +534,8 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("5_skdqt")
 metadata/_custom_type_script = "uid://ya240urtqqhp"
+
+[node name="fade_system" parent="." instance=ExtResource("6_vevy6")]
 
 [node name="cutscene_room" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, 8.940697e-08, 0, 1, 0, -8.940697e-08, 0, -1, 0, -1.9785461, 2.5366035)

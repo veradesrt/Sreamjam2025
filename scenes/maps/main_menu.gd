@@ -5,19 +5,22 @@ extends Node3D
 
 @onready var hover_sound: AudioStreamPlayer = $hover_sound
 @onready var click_sound: AudioStreamPlayer = $click_sound
+@onready var fade_system: fade_screen_system = $UI/fade_system
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	fade_system.force_set_screen_to_clear()
+	fade_system.fade_to_black_ended.connect(change_scene_to_cutscene)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
 func _on_play_pressed() -> void:
-	
 	SceneChanger.play_sound_across_scenes()
+	fade_system.fade_from_clear_to_black()
+
+func change_scene_to_cutscene():
 	SceneChanger.request_scene_change("cutscene")
 
 func _on_settings_pressed() -> void:

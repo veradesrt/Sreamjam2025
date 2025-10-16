@@ -12,6 +12,8 @@ class_name Player
 
 @onready var main_menu: Control = $UI
 
+@onready var fade_system: fade_screen_system = $UI/fade_system
+
 var footsteps_dirt : Array = [load("res://assets/footstep_dirt_1.ogg"),load("res://assets/footstep_dirt_2.ogg")]
 var footsteps_concrete : Array = [load("res://assets/footstep_concrete_1.ogg"),load("res://assets/footstep_concrete_2.ogg"),load("res://assets/footstep_concrete_3.ogg")]
 
@@ -29,6 +31,9 @@ func _ready() -> void:
 	change_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	mouse_sens = PlayerData.get_mouse_sensitivity()
 	PlayerData.mouse_sens_changed.connect(change_mouse_sens)
+	
+	fade_system.force_set_screen_to_black()
+	fade_system.fade_from_black_to_clear()
 
 ## function used to change the mouse mode from a single place
 func change_mouse_mode(new_mode):
