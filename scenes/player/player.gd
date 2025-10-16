@@ -12,14 +12,13 @@ class_name Player
 
 @onready var main_menu: Control = $UI
 
+@onready var movement_configuration: MovementConfiguration = $MovementConfiguration
+
+@onready var inventory_node: InventoryNode = $InventoryNode
+
 var footsteps_dirt : Array = [load("res://assets/footstep_dirt_1.ogg"),load("res://assets/footstep_dirt_2.ogg")]
 var footsteps_concrete : Array = [load("res://assets/footstep_concrete_1.ogg"),load("res://assets/footstep_concrete_2.ogg"),load("res://assets/footstep_concrete_3.ogg")]
 
-## used to control the player movement speed
-const SPEED = 5.0
-
-## Unused
-const JUMP_VELOCITY = 2
 
 ## mouse sensitivity, used for camera control
 var mouse_sens : float 
@@ -54,10 +53,19 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		velocity.y = movement_configuration.JUMP_SPEED
 
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if(movement_configuration.CAN_MOVE):
+		move(direction)
+	else:
+		velocity = Vector3.ZERO
+	
+	move_and_slide()
+
+
+func move(direction : Vector3) -> void:
 	if direction:
 		##only if the player is moving
 		##check if the ground check can detect ground
@@ -79,10 +87,8 @@ func _physics_process(delta: float) -> void:
 					footsteps_player.pitch_scale = randf_range(0.9,1.1)
 					footsteps_player.play()
 
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * movement_configuration.SPEED
+		velocity.z = direction.z * movement_configuration.SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
-	move_and_slide()
+		velocity.x = move_toward(velocity.x, 0, movement_configuration.SPEED)
+		velocity.z = move_toward(velocity.z, 0, movement_configuration.SPEED)

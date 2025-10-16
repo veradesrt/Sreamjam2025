@@ -1,11 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://c78bdq77ygnhk"]
+[gd_scene load_steps=13 format=3 uid="uid://c78bdq77ygnhk"]
 
 [ext_resource type="PackedScene" uid="uid://bidwu6pvfcasl" path="res://scenes/player/player.tscn" id="1_8wxmh"]
 [ext_resource type="PackedScene" uid="uid://bg7qt4fnwttvq" path="res://scenes/primitives/trigger.tscn" id="2_pwihf"]
-[ext_resource type="Script" uid="uid://5vol0c1sctto" path="res://scripts/interactable/InteractableNode.gd" id="3_6hyye"]
 [ext_resource type="PackedScene" uid="uid://kutieyc8oj64" path="res://scenes/primitives/dialogue_emitter_3d.tscn" id="3_gx8es"]
 [ext_resource type="Resource" uid="uid://b7pcjhuuijv50" path="res://resources/dialogue/example.tres" id="4_2avkh"]
-[ext_resource type="Texture2D" uid="uid://dk6ux8aiesioe" path="res://icon.svg" id="6_dlv6v"]
+[ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="6_n56wl"]
+[ext_resource type="Resource" uid="uid://dc35a6vumpdfy" path="res://resources/items/test_item.tres" id="7_n56wl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8wxmh"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -26,11 +26,7 @@ albedo_color = Color(0.32941177, 0.1764706, 0, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_6hyye"]
 size = Vector3(5, 5, 5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gx8es"]
-albedo_color = Color(1, 1, 0, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_2avkh"]
-size = Vector3(1, 1, 0.9970093)
+[sub_resource type="BoxShape3D" id="BoxShape3D_dlv6v"]
 
 [node name="main" type="Node3D"]
 
@@ -55,7 +51,7 @@ material = SubResource("StandardMaterial3D_8wxmh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.516809, 2.1821399, 0)
 
 [node name="dialogue_emitter_3d" parent="." instance=ExtResource("3_gx8es")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.556388, 2.8090482, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.556388, 2.8090482, 14.980329)
 dialogue = ExtResource("4_2avkh")
 
 [node name="trigger" parent="dialogue_emitter_3d" instance=ExtResource("2_pwihf")]
@@ -63,28 +59,27 @@ dialogue = ExtResource("4_2avkh")
 [node name="CollisionShape3D" parent="dialogue_emitter_3d/trigger" index="0"]
 shape = SubResource("BoxShape3D_6hyye")
 
-[node name="InteractableTest" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2781496, -4.128669)
-material_override = SubResource("StandardMaterial3D_gx8es")
+[node name="Yellow Cube" parent="." instance=ExtResource("6_n56wl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.771843, 2.7983403, 0)
 
-[node name="InteractableNode" type="Area3D" parent="InteractableTest"]
-script = ExtResource("3_6hyye")
-interactable_name = "Yellow Cube"
-metadata/_custom_type_script = "uid://5vol0c1sctto"
+[node name="InteractableNode" parent="Yellow Cube/Components" index="0"]
+monitorable = false
+is_on = false
+interactable_name = "White Cube"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableTest/InteractableNode"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0014953613)
-shape = SubResource("BoxShape3D_2avkh")
+[node name="CollisionShape3D" parent="Yellow Cube/Components/InteractableNode" index="0"]
+shape = SubResource("BoxShape3D_dlv6v")
 
-[node name="interactable_test" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-visibility_range_end = 10.0
-visibility_range_end_margin = 3.0
-visibility_range_fade_mode = 1
-billboard = 1
-no_depth_test = true
-texture = ExtResource("6_dlv6v")
+[node name="DialogueEmitter3D" parent="Yellow Cube/Components" index="1"]
+dialogue = ExtResource("4_2avkh")
+
+[node name="ItemNode" parent="Yellow Cube/Components" index="2"]
+item_data = ExtResource("7_n56wl")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Yellow Cube/Components" index="3"]
+metadata/_edit_lock_ = true
 
 [connection signal="player_entered" from="dialogue_emitter_3d/trigger" to="dialogue_emitter_3d" method="start_dialogue"]
 
 [editable path="dialogue_emitter_3d/trigger"]
+[editable path="Yellow Cube"]
