@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cddltd7h087ys"]
+
+[ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="1_5cvtb"]
+[ext_resource type="Resource" uid="uid://o7c15c4u2yer" path="res://resources/items/key.tres" id="2_6kn5x"]
+[ext_resource type="PackedScene" uid="uid://ca3h7sx6rfakh" path="res://assets/3D models/items/scream_jam_key.glb" id="3_88ujd"]
+
+[node name="key" instance=ExtResource("1_5cvtb")]
+
+[node name="ItemNode" parent="Components" index="2"]
+item_data = ExtResource("2_6kn5x")
+
+[node name="scream_jam_key" parent="Components" index="3" instance=ExtResource("3_88ujd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.47988006, 0, 0)
+
+[node name="interactable_test" parent="." index="1"]
+visibility_range_begin = 0.5
+visibility_range_begin_margin = 0.5

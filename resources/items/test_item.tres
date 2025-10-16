@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_psov8")
-name = "Yellow Cube"
+name = "Yellow_cube"
 metadata/_custom_type_script = "uid://cbxuwoq6kloo8"

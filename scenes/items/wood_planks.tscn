@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvrfbkk0o61xh"]
+
+[ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="1_fk41h"]
+[ext_resource type="Resource" uid="uid://cxp6cqwe7w0b6" path="res://resources/items/wood_planks.tres" id="2_68uct"]
+
+[node name="wood_planks" instance=ExtResource("1_fk41h")]
+
+[node name="ItemNode" parent="Components" index="2"]
+item_data = ExtResource("2_68uct")

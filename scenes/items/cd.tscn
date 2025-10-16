@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8qgt2qbdpc28"]
+
+[ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="1_vn8hb"]
+[ext_resource type="Resource" uid="uid://d2lics5skb84b" path="res://resources/items/cd.tres" id="2_tnffk"]
+
+[node name="cd" instance=ExtResource("1_vn8hb")]
+
+[node name="ItemNode" parent="Components" index="2"]
+item_data = ExtResource("2_tnffk")

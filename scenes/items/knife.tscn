@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://d688iapjvmjv"]
+
+[ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="1_ivdxo"]
+[ext_resource type="Resource" uid="uid://dswtxucmgcif8" path="res://resources/items/knife.tres" id="2_bgb47"]
+
+[node name="knife" instance=ExtResource("1_ivdxo")]
+
+[node name="ItemNode" parent="Components" index="2"]
+item_data = ExtResource("2_bgb47")

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://4s0x378ye5cd"]
+
+[ext_resource type="Script" uid="uid://cbxuwoq6kloo8" path="res://scripts/items/ItemData.gd" id="1_sbqqt"]
+
+[resource]
+script = ExtResource("1_sbqqt")
+name = "mouse"
+metadata/_custom_type_script = "uid://cbxuwoq6kloo8"
