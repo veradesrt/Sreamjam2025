@@ -15,7 +15,7 @@ func _ready() -> void:
 func clear_screen_ended():
 	pass
 
-func dialogue_ended():
+func dialogue_ended(_d : Dialogue):
 	fade_system.fade_from_clear_to_black()
 
 func _process(delta: float) -> void:

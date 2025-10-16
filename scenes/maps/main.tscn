@@ -5,11 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://bg7qt4fnwttvq" path="res://scenes/primitives/trigger.tscn" id="2_pwihf"]
 [ext_resource type="PackedScene" uid="uid://kutieyc8oj64" path="res://scenes/primitives/dialogue_emitter_3d.tscn" id="3_gx8es"]
 [ext_resource type="Resource" uid="uid://b7pcjhuuijv50" path="res://resources/dialogue/example.tres" id="4_2avkh"]
-[ext_resource type="AudioStream" uid="uid://die23ti0nyo30" path="res://assets/ambiance_sound/Wind Blowing Fade Out.mp3" id="7_m6k0o"]
-[ext_resource type="AudioStream" uid="uid://c47vd0q7ljhat" path="res://assets/ambiance_sound/Wind Howling.wav" id="9_ss43a"]
-[ext_resource type="PackedScene" uid="uid://clref3a7bfd5l" path="res://scenes/buildings/main_level.tscn" id="8_m6k0o"]
 [ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="6_n56wl"]
+[ext_resource type="AudioStream" uid="uid://die23ti0nyo30" path="res://assets/ambiance_sound/Wind Blowing Fade Out.mp3" id="7_m6k0o"]
 [ext_resource type="Resource" uid="uid://dc35a6vumpdfy" path="res://resources/items/test_item.tres" id="7_n56wl"]
+[ext_resource type="PackedScene" uid="uid://clref3a7bfd5l" path="res://scenes/buildings/main_level.tscn" id="8_m6k0o"]
+[ext_resource type="AudioStream" uid="uid://c47vd0q7ljhat" path="res://assets/ambiance_sound/Wind Howling.wav" id="9_ss43a"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_n56wl"]
 rayleigh_coefficient = 5.94
@@ -96,15 +96,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8488073, 0.69369125, 0)
 shape = SubResource("BoxShape3D_6hyye")
 
 [node name="Yellow Cube" parent="." instance=ExtResource("6_n56wl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.771843, 2.7983403, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.366873, 0.8297477, 0)
 
 [node name="InteractableNode" parent="Yellow Cube/Components" index="0"]
 monitorable = false
-is_on = false
 interactable_name = "White Cube"
 
 [node name="CollisionShape3D" parent="Yellow Cube/Components/InteractableNode" index="0"]
 shape = SubResource("BoxShape3D_dlv6v")
+
+[node name="DialogueEmitter3D" parent="Yellow Cube/Components" index="1"]
+dialogue = ExtResource("4_2avkh")
+
+[node name="ItemNode" parent="Yellow Cube/Components" index="2"]
+item_data = ExtResource("7_n56wl")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Yellow Cube/Components" index="3"]
+metadata/_edit_lock_ = true
 
 [node name="blockout" type="CSGBox3D" parent="." groups=["concrete"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52350235, -54.35317, -63.925903)
@@ -470,18 +478,10 @@ shape = SubResource("BoxShape3D_ss43a")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="trigger"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.152661, 0)
 stream = ExtResource("9_ss43a")
-[node name="DialogueEmitter3D" parent="Yellow Cube/Components" index="1"]
-dialogue = ExtResource("4_2avkh")
-
-[node name="ItemNode" parent="Yellow Cube/Components" index="2"]
-item_data = ExtResource("7_n56wl")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Yellow Cube/Components" index="3"]
-metadata/_edit_lock_ = true
 
 [connection signal="player_entered" from="dialogue_emitter_3d/trigger" to="dialogue_emitter_3d" method="start_dialogue"]
 
 [editable path="dialogue_emitter_3d/trigger"]
+[editable path="Yellow Cube"]
 [editable path="scream_jam_all"]
 [editable path="trigger"]
-[editable path="Yellow Cube"]
