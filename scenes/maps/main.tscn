@@ -73,6 +73,8 @@ texture = ExtResource("6_dlv6v")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.771843, 2.7983403, 0)
 
 [node name="InteractableNode" parent="Yellow Cube/Components" index="0"]
+monitorable = false
+is_on = false
 interactable_name = "White Cube"
 
 [node name="CollisionShape3D" parent="Yellow Cube/Components/InteractableNode" index="0"]

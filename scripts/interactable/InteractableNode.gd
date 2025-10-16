@@ -18,6 +18,7 @@ func _enter_tree() -> void:
 	set_collision_layer_value(4,true)
 	monitoring = false
 	switch(is_on)
+	print(monitoring)
 
 func _first_interact() -> void:
 	first_interact.emit()
@@ -34,4 +35,8 @@ func _out_of_contact() -> void:
 	out_of_contact.emit()
 
 func switch(state : bool) -> void:
+	if(state):
+		set_collision_layer_value(4,true)
+	else:
+		set_collision_layer_value(4,false)
 	monitorable = state
