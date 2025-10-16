@@ -1,9 +1,53 @@
-[gd_scene load_steps=3 format=3 uid="uid://eqd6uw4ixlr8"]
+[gd_scene load_steps=7 format=4 uid="uid://eqd6uw4ixlr8"]
 
 [ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="1_3k7mx"]
 [ext_resource type="Resource" uid="uid://7rtab4gf22cr" path="res://resources/items/book.tres" id="2_k3vm4"]
+[ext_resource type="Texture2D" uid="uid://c7nufnccvkq5m" path="res://assets/3D models/items/scream_jam_items_martin_fierro_256.png" id="3_4l2gc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bubsb"]
+resource_name = "martin_fierro"
+cull_mode = 2
+albedo_texture = ExtResource("3_4l2gc")
+roughness = 0.5
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_f3sjr"]
+_surfaces = [{
+"aabb": AABB(-0.2091375, -0.011858431, -0.3161188, 0.418275, 0.023716861, 0.6322376),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"name": "martin_fierro",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3e67c"]
+resource_name = "scream_jam_items_Cube_002"
+_surfaces = [{
+"aabb": AABB(-0.2091375, -0.011858431, -0.3161188, 0.418275, 0.023716861, 0.6322376),
+"attribute_data": PackedByteArray("GoFv/oaNK4EagSuBho1v/mqVZMDA2KKUapWilMDYZMD542TAo6CilPnjopSjoGTAwNhkwGqVopTA2KKUapVkwIp+14D////////XgIp+/////9eAin7//4p+14D/////"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_bubsb"),
+"name": "martin_fierro",
+"primitive": 3,
+"uv_scale": Vector4(1.998856, 2.006091, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAAAAAAAAAAAAP////8AAAAAAAD//wAAAAD//wAAAAAAAP//AAAAAP+//////////7//////AAD/v///AAD///+///8AAP//AIAAAP////8AgP///////wCAAAAAAP//AIAAAAAAAAD/P///AAD///8///8AAAAA/z8AAAAA////P/////8AAP+/AAD//////78AAP//AAD/v/////////+//z//f/8//3//P/9//z//f////3////9/////f////3//fwAA/38AAP9/AAD/fwAA/3////9/////f////3///wAA/38AAP9/AAD/fwAA/3////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_f3sjr")
 
 [node name="book" instance=ExtResource("1_3k7mx")]
 
 [node name="ItemNode" parent="Components" index="2"]
 item_data = ExtResource("2_k3vm4")
+
+[node name="book" type="MeshInstance3D" parent="Components" index="3"]
+mesh = SubResource("ArrayMesh_3e67c")
+skeleton = NodePath("")

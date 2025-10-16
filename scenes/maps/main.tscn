@@ -1,22 +1,36 @@
-[gd_scene load_steps=19 format=3 uid="uid://c78bdq77ygnhk"]
+[gd_scene load_steps=26 format=3 uid="uid://c78bdq77ygnhk"]
 
 [ext_resource type="PackedScene" uid="uid://bidwu6pvfcasl" path="res://scenes/player/player.tscn" id="1_8wxmh"]
 [ext_resource type="PackedScene" uid="uid://bg7qt4fnwttvq" path="res://scenes/primitives/trigger.tscn" id="2_pwihf"]
 [ext_resource type="PackedScene" uid="uid://kutieyc8oj64" path="res://scenes/primitives/dialogue_emitter_3d.tscn" id="3_gx8es"]
-[ext_resource type="Resource" uid="uid://b7pcjhuuijv50" path="res://resources/dialogue/example.tres" id="4_2avkh"]
-[ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="6_n56wl"]
+[ext_resource type="Script" uid="uid://jepaqxoulkry" path="res://scripts/dialogue/text/Text.gd" id="3_kvreu"]
+[ext_resource type="Script" uid="uid://d6yrcdl51eli" path="res://scripts/dialogue/dialogue/Dialogue.gd" id="4_qy6yc"]
 [ext_resource type="AudioStream" uid="uid://die23ti0nyo30" path="res://assets/ambiance_sound/Wind Blowing Fade Out.mp3" id="7_m6k0o"]
-[ext_resource type="Resource" uid="uid://dc35a6vumpdfy" path="res://resources/items/test_item.tres" id="7_n56wl"]
 [ext_resource type="PackedScene" uid="uid://clref3a7bfd5l" path="res://scenes/buildings/main_level.tscn" id="8_m6k0o"]
+[ext_resource type="PackedScene" uid="uid://26iog62lxp31" path="res://scenes/items/mouse.tscn" id="9_4h6cl"]
 [ext_resource type="AudioStream" uid="uid://c47vd0q7ljhat" path="res://assets/ambiance_sound/Wind Howling.wav" id="9_ss43a"]
+[ext_resource type="PackedScene" uid="uid://c8qgt2qbdpc28" path="res://scenes/items/cd.tscn" id="10_536tc"]
+[ext_resource type="PackedScene" uid="uid://cddltd7h087ys" path="res://scenes/items/key.tscn" id="11_imbm3"]
+[ext_resource type="PackedScene" uid="uid://c2fdruo5giyot" path="res://scenes/items/ball.tscn" id="12_b02sy"]
+[ext_resource type="PackedScene" uid="uid://eqd6uw4ixlr8" path="res://scenes/items/book.tscn" id="13_8465s"]
+[ext_resource type="PackedScene" uid="uid://d688iapjvmjv" path="res://scenes/items/knife.tscn" id="14_7tg1g"]
+[ext_resource type="PackedScene" uid="uid://bncdgneygt60g" path="res://scenes/items/mask.tscn" id="15_7goih"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8wxmh"]
 albedo_color = Color(0.32941177, 0.1764706, 0, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6hyye"]
-size = Vector3(5, 5, 5)
+[sub_resource type="Resource" id="Resource_utjhh"]
+script = ExtResource("3_kvreu")
+content = "I should grab the objects list, and sign up for the hunt before going further"
+metadata/_custom_type_script = "uid://jepaqxoulkry"
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_dlv6v"]
+[sub_resource type="Resource" id="Resource_4jiwq"]
+script = ExtResource("4_qy6yc")
+dialogue = Array[ExtResource("3_kvreu")]([SubResource("Resource_utjhh")])
+metadata/_custom_type_script = "uid://d6yrcdl51eli"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6hyye"]
+size = Vector3(5, 5, 1.6245117)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2avkh"]
 albedo_color = Color(0.43137255, 0.4509804, 0, 1)
@@ -45,42 +59,23 @@ use_collision = true
 size = Vector3(20, 1, 20)
 
 [node name="dirt_ground" type="CSGBox3D" parent="." groups=["dirt"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07369423, 0, 20.403652)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.39995, -0.55632305, 14.162622)
 use_collision = true
 size = Vector3(20, 1, 20)
 material = SubResource("StandardMaterial3D_8wxmh")
 
 [node name="player" parent="." instance=ExtResource("1_8wxmh")]
-transform = Transform3D(0.40758154, 0, -0.91316885, 0, 1, 0, 0.91316885, 0, 0.40758154, 44.960407, 1.2885408, -92.50512)
+transform = Transform3D(0.40758154, 0, -0.91316885, 0, 1, 0, 0.91316885, 0, 0.40758154, 7.6250744, 1.2885408, 5.7421875)
 
-[node name="dialogue_emitter_3d" parent="." instance=ExtResource("3_gx8es")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.556388, 2.8090482, 9.438675)
-dialogue = ExtResource("4_2avkh")
+[node name="grab_items_warning" parent="." instance=ExtResource("3_gx8es")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.107078, 2.8090482, 0.30090404)
+dialogue = SubResource("Resource_4jiwq")
 
-[node name="trigger" parent="dialogue_emitter_3d" instance=ExtResource("2_pwihf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8488073, 0.69369125, 0)
+[node name="trigger" parent="grab_items_warning" instance=ExtResource("2_pwihf")]
 
-[node name="CollisionShape3D" parent="dialogue_emitter_3d/trigger" index="0"]
+[node name="CollisionShape3D" parent="grab_items_warning/trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.67456055)
 shape = SubResource("BoxShape3D_6hyye")
-
-[node name="Yellow Cube" parent="." instance=ExtResource("6_n56wl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.366873, 0.8297477, 0)
-
-[node name="InteractableNode" parent="Yellow Cube/Components" index="0"]
-monitorable = false
-interactable_name = "White Cube"
-
-[node name="CollisionShape3D" parent="Yellow Cube/Components/InteractableNode" index="0"]
-shape = SubResource("BoxShape3D_dlv6v")
-
-[node name="DialogueEmitter3D" parent="Yellow Cube/Components" index="1"]
-dialogue = ExtResource("4_2avkh")
-
-[node name="ItemNode" parent="Yellow Cube/Components" index="2"]
-item_data = ExtResource("7_n56wl")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Yellow Cube/Components" index="3"]
-metadata/_edit_lock_ = true
 
 [node name="blockout" type="CSGBox3D" parent="." groups=["concrete"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52350235, -54.35317, -63.925903)
@@ -452,9 +447,32 @@ shape = SubResource("BoxShape3D_ss43a")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.152661, 0)
 stream = ExtResource("9_ss43a")
 
-[connection signal="player_entered" from="dialogue_emitter_3d/trigger" to="dialogue_emitter_3d" method="start_dialogue"]
+[node name="items" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.923019, 0, 10.591072)
 
-[editable path="dialogue_emitter_3d/trigger"]
-[editable path="Yellow Cube"]
+[node name="mouse" parent="items" instance=ExtResource("9_4h6cl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6045427, 0.7305975, 0)
+
+[node name="cd" parent="items" instance=ExtResource("10_536tc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5496626, 0.7305975, 0)
+
+[node name="key" parent="items" instance=ExtResource("11_imbm3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5836706, 0.7305975, 0)
+
+[node name="ball" parent="items" instance=ExtResource("12_b02sy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1148033, 0.7305975, 0)
+
+[node name="book" parent="items" instance=ExtResource("13_8465s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4043808, 0.7305975, 0)
+
+[node name="knife" parent="items" instance=ExtResource("14_7tg1g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3842735, 0.7305975, 0)
+
+[node name="mask" parent="items" instance=ExtResource("15_7goih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7305975, 0)
+
+[connection signal="player_entered" from="grab_items_warning/trigger" to="grab_items_warning" method="start_dialogue"]
+
+[editable path="grab_items_warning/trigger"]
 [editable path="scream_jam_all"]
 [editable path="trigger"]
