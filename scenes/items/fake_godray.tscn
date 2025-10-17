@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://ue3rrkqutg3d"]
+
+[ext_resource type="Shader" uid="uid://c8ukgsnm8rqls" path="res://scripts/test.gdshader" id="1_r5vk6"]
+
+[sub_resource type="Gradient" id="Gradient_r5vk6"]
+colors = PackedColorArray(0, 0, 0, 1, 0.6627451, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qsmyi"]
+gradient = SubResource("Gradient_r5vk6")
+
+[sub_resource type="Gradient" id="Gradient_dnros"]
+offsets = PackedFloat32Array(0, 0.34946236, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.5268817, 0.5268817, 0.5268817, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vtk85"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w6rpm"]
+noise = SubResource("FastNoiseLite_vtk85")
+color_ramp = SubResource("Gradient_dnros")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qsmyi"]
+render_priority = 0
+shader = ExtResource("1_r5vk6")
+shader_parameter/alpha = 1.0
+shader_parameter/rim_power = 3.9630001882425
+shader_parameter/texture_emission = SubResource("NoiseTexture2D_w6rpm")
+shader_parameter/gradient = SubResource("GradientTexture1D_qsmyi")
+shader_parameter/emission = Color(0.25490198, 0.88235295, 1, 1)
+shader_parameter/emission_energy = 1.0
+shader_parameter/uv1_scale = Vector3(5, 0, 0)
+shader_parameter/uv1_offset = Vector3(0, 1, 0)
+
+[sub_resource type="Animation" id="Animation_6uc4l"]
+resource_name = "new_animation"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/uv1_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 9.966666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(5, 0, 0), Vector3(3.685, 0.5, 0), Vector3(5, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c6mvu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/uv1_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(5, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nsmtm"]
+_data = {
+&"RESET": SubResource("Animation_c6mvu"),
+&"new_animation": SubResource("Animation_6uc4l")
+}
+
+[node name="fake_godray" type="CSGCylinder3D"]
+cone = true
+material = SubResource("ShaderMaterial_qsmyi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nsmtm")
+}
+autoplay = "new_animation"

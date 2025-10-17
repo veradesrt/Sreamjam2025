@@ -519,6 +519,7 @@ autoplay = "headbob"
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6436487)
+visible = false
 text = "cutscene"
 
 [node name="dialogue_emitter_3d" parent="." instance=ExtResource("2_ok5ce")]
