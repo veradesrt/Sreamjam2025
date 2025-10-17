@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_ysch7")
-name = "wood_planks"
+name = "book"
 metadata/_custom_type_script = "uid://cbxuwoq6kloo8"

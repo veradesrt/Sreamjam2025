@@ -8,6 +8,8 @@ var sfx_audio_db : float = 0
 var player_ref : Player
 var inventory_ref : InventoryNode
 
+var has_beaten_game : bool = false
+
 signal mouse_sens_changed()
 
 
@@ -30,6 +32,11 @@ func set_master_audio(new_master_db:float)->void:
 
 func get_master_audio()->float:
 	return master_audio_db
+
+func set_player_ref(new_pl:Player)->void:
+	player_ref = new_pl
+func get_player_ref()->Player:
+	return player_ref
 
 func set_inv_ref(inv:InventoryNode)->void:
 	inventory_ref = inv

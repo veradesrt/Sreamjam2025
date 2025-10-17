@@ -5,7 +5,15 @@
 
 [sub_resource type="Resource" id="Resource_i6wux"]
 script = ExtResource("1_c8qq1")
-content = "Grab book"
+content = "Aqui me pongo a cantar,
+Al compas de la viguela
+que el hombre que lo desvela
+una pena estraordinaria
+como el ave solitaria
+con el cantar se consuela
+. . ."
+skip_time = 1.0
+typewrite_speed = 0.05
 metadata/_custom_type_script = "uid://jepaqxoulkry"
 
 [resource]

@@ -338,6 +338,30 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
+[node name="skull_mask" type="Label" parent="UI/objectives_list/VBoxContainer"]
+layout_mode = 2
+text = "A hallowen skull mask"
+
+[node name="knife" type="Label" parent="UI/objectives_list/VBoxContainer"]
+layout_mode = 2
+text = "A Knife with a blue handle"
+
+[node name="cd" type="Label" parent="UI/objectives_list/VBoxContainer"]
+layout_mode = 2
+text = "A CD case"
+
+[node name="book" type="Label" parent="UI/objectives_list/VBoxContainer"]
+layout_mode = 2
+text = "An old classic (Book)"
+
+[node name="mouse" type="Label" parent="UI/objectives_list/VBoxContainer"]
+layout_mode = 2
+text = "A (Broken) computer mouse"
+
+[node name="ball" type="Label" parent="UI/objectives_list/VBoxContainer"]
+layout_mode = 2
+text = "A soccer ball, with a red cross"
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_dovo2")
 

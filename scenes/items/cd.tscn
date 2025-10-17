@@ -90,3 +90,6 @@ item_data = ExtResource("2_tnffk")
 [node name="CD" type="MeshInstance3D" parent="Components" index="3"]
 mesh = SubResource("ArrayMesh_2dpbt")
 skeleton = NodePath("")
+
+[node name="interactable_test" parent="." index="1"]
+pixel_size = 0.005

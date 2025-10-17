@@ -1,9 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7l6eyg6bgq4b"]
+[gd_scene load_steps=11 format=3 uid="uid://c7l6eyg6bgq4b"]
 
 [ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="1_4ctwl"]
+[ext_resource type="Script" uid="uid://jepaqxoulkry" path="res://scripts/dialogue/text/Text.gd" id="2_ct0v5"]
 [ext_resource type="Resource" uid="uid://cnmo45d8c7bgy" path="res://resources/items/object_list.tres" id="2_tyvmn"]
+[ext_resource type="Texture2D" uid="uid://djtqytm12cb5w" path="res://assets/3D models/scream_jam_disco_keyboard256.jpg" id="3_vmhxp"]
+[ext_resource type="Script" uid="uid://d6yrcdl51eli" path="res://scripts/dialogue/dialogue/Dialogue.gd" id="3_wi7cg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ct0v5"]
+size = Vector3(0.64, 0.69, 0.395)
+
+[sub_resource type="Resource" id="Resource_tkr40"]
+script = ExtResource("2_ct0v5")
+content = "The list with the required objects to win the game"
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_00vq0"]
+script = ExtResource("3_wi7cg")
+dialogue = Array[ExtResource("2_ct0v5")]([SubResource("Resource_tkr40")])
+metadata/_custom_type_script = "uid://d6yrcdl51eli"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wi7cg"]
+albedo_texture = ExtResource("3_vmhxp")
+emission_enabled = true
+emission = Color(0.2716817, 0.2716817, 0.2716817, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ct0v5"]
+material = SubResource("StandardMaterial3D_wi7cg")
+size = Vector3(0.365, 0.61, 0.055)
 
 [node name="object_list" instance=ExtResource("1_4ctwl")]
 
+[node name="CollisionShape3D" parent="Components/InteractableNode" index="0"]
+shape = SubResource("BoxShape3D_ct0v5")
+
+[node name="DialogueEmitter3D" parent="Components" index="1"]
+dialogue = SubResource("Resource_00vq0")
+
 [node name="ItemNode" parent="Components" index="2"]
 item_data = ExtResource("2_tyvmn")
+
+[node name="paper" type="MeshInstance3D" parent="." index="2"]
+mesh = SubResource("BoxMesh_ct0v5")

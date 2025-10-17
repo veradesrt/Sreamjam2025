@@ -1,9 +1,59 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8v3fbuwe50r0"]
+[gd_scene load_steps=14 format=3 uid="uid://c8v3fbuwe50r0"]
 
 [ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="1_4rjfj"]
+[ext_resource type="Script" uid="uid://jepaqxoulkry" path="res://scripts/dialogue/text/Text.gd" id="2_bwxvf"]
 [ext_resource type="Resource" uid="uid://boxae8ewo4fqe" path="res://resources/items/participant_list.tres" id="2_sm2cp"]
+[ext_resource type="Script" uid="uid://d6yrcdl51eli" path="res://scripts/dialogue/dialogue/Dialogue.gd" id="3_181ig"]
+[ext_resource type="Texture2D" uid="uid://djtqytm12cb5w" path="res://assets/3D models/scream_jam_disco_keyboard256.jpg" id="3_pa5ta"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uwkqd"]
+size = Vector3(0.555, 0.83, 0.59)
+
+[sub_resource type="Resource" id="Resource_cd76y"]
+script = ExtResource("2_bwxvf")
+content = "Participants :
+(Put your name under here !)"
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_gnyv3"]
+script = ExtResource("2_bwxvf")
+content = "ElDuende"
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_0d4uu"]
+script = ExtResource("2_bwxvf")
+content = "Huh.. guess someone got here before me"
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_bwxvf"]
+script = ExtResource("2_bwxvf")
+content = "I will add my name too"
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_16w8l"]
+script = ExtResource("3_181ig")
+dialogue = Array[ExtResource("2_bwxvf")]([SubResource("Resource_cd76y"), SubResource("Resource_gnyv3"), SubResource("Resource_0d4uu"), SubResource("Resource_bwxvf")])
+metadata/_custom_type_script = "uid://d6yrcdl51eli"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85b2s"]
+albedo_texture = ExtResource("3_pa5ta")
+emission_enabled = true
+emission = Color(0.2716817, 0.2716817, 0.2716817, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bwxvf"]
+material = SubResource("StandardMaterial3D_85b2s")
+size = Vector3(0.365, 0.61, 0.055)
 
 [node name="participant_list" instance=ExtResource("1_4rjfj")]
 
+[node name="CollisionShape3D" parent="Components/InteractableNode" index="0"]
+shape = SubResource("BoxShape3D_uwkqd")
+
+[node name="DialogueEmitter3D" parent="Components" index="1"]
+dialogue = SubResource("Resource_16w8l")
+
 [node name="ItemNode" parent="Components" index="2"]
 item_data = ExtResource("2_sm2cp")
+
+[node name="paper" type="MeshInstance3D" parent="Components" index="3"]
+mesh = SubResource("BoxMesh_bwxvf")

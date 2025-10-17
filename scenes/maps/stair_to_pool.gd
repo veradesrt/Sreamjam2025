@@ -14,6 +14,9 @@ func planks_placed() -> void:
 	plank_mesh.visible = true
 	frontal_collision.disabled = true
 
+func planks_grabbed()->void:
+	shadow_decal.visible = false
+
 func enable_plank_grab()->void:
 	wood_planks.interactable_node.switch(true)
 

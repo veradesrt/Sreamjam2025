@@ -5,7 +5,7 @@
 
 [sub_resource type="Resource" id="Resource_q52le"]
 script = ExtResource("1_ikk2m")
-content = "Grab knife"
+content = "Most homes have this exact model"
 metadata/_custom_type_script = "uid://jepaqxoulkry"
 
 [resource]

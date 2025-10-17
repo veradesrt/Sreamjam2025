@@ -1,14 +1,25 @@
-[gd_resource type="Resource" script_class="Dialogue" load_steps=4 format=3 uid="uid://radbflv86hy0"]
+[gd_resource type="Resource" script_class="Dialogue" load_steps=6 format=3 uid="uid://radbflv86hy0"]
 
 [ext_resource type="Script" uid="uid://jepaqxoulkry" path="res://scripts/dialogue/text/Text.gd" id="1_3xisg"]
 [ext_resource type="Script" uid="uid://d6yrcdl51eli" path="res://scripts/dialogue/dialogue/Dialogue.gd" id="2_ummuh"]
 
 [sub_resource type="Resource" id="Resource_1y6jl"]
 script = ExtResource("1_3xisg")
-content = "Mouse grab"
+content = "Lettuce? never heard of it"
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_3xisg"]
+script = ExtResource("1_3xisg")
+content = ". . ."
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_ummuh"]
+script = ExtResource("1_3xisg")
+content = "Just kidding its a normal mouse
+and a pain to clean. . ."
 metadata/_custom_type_script = "uid://jepaqxoulkry"
 
 [resource]
 script = ExtResource("2_ummuh")
-dialogue = Array[ExtResource("1_3xisg")]([SubResource("Resource_1y6jl")])
+dialogue = Array[ExtResource("1_3xisg")]([SubResource("Resource_1y6jl"), SubResource("Resource_3xisg"), SubResource("Resource_ummuh")])
 metadata/_custom_type_script = "uid://d6yrcdl51eli"

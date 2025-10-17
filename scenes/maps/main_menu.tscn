@@ -1,11 +1,40 @@
-[gd_scene load_steps=11 format=3 uid="uid://cm5fdk81bqipp"]
+[gd_scene load_steps=20 format=3 uid="uid://cm5fdk81bqipp"]
 
 [ext_resource type="Script" uid="uid://b6x1btd1tema1" path="res://scenes/maps/main_menu.gd" id="1_4rqo4"]
 [ext_resource type="AudioStream" uid="uid://ygpj0fecjohk" path="res://assets/ui_sounds/Button Hover.mp3" id="2_djnby"]
 [ext_resource type="PackedScene" uid="uid://casdggffaussy" path="res://scenes/player/fade_system.tscn" id="2_rwcdj"]
+[ext_resource type="Texture2D" uid="uid://b52f36d07ql16" path="res://assets/3D models/BloodOnTheWater-BloodOnTheWater.png" id="3_2gck5"]
 [ext_resource type="AudioStream" uid="uid://cypcud4iwrv5d" path="res://assets/ui_sounds/Button Menu Press.mp3" id="3_rwcdj"]
 [ext_resource type="AudioStream" uid="uid://dydb6nc63brbd" path="res://assets/ambiance_sound/SJ 25 Track 1_looped.ogg" id="4_djnby"]
 [ext_resource type="PackedScene" uid="uid://clref3a7bfd5l" path="res://scenes/buildings/main_level.tscn" id="6_awsrp"]
+[ext_resource type="Texture2D" uid="uid://dcys373kjuwru" path="res://assets/3D models/hanged_draw.png" id="7_0sxhj"]
+
+[sub_resource type="Animation" id="Animation_0sxhj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.7658081, 1.9157447, 3.0362234)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.36151004, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_awsrp"]
 resource_name = "head_bob"
@@ -36,33 +65,6 @@ tracks/1/keys = {
 "values": [Vector3(0, -0.36151004, 0), Vector3(-0.05235988, -0.36128315, 0), Vector3(0, -0.36151004, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_0sxhj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.7658081, 1.9157447, 3.0362234)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -0.36151004, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2gck5"]
 _data = {
 &"RESET": SubResource("Animation_0sxhj"),
@@ -71,6 +73,84 @@ _data = {
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4rqo4"]
 bg_color = Color(0.13028675, 0.13028681, 0.1302867, 1)
+
+[sub_resource type="Animation" id="Animation_cikvh"]
+resource_name = "new_animation"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4, 2.9333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_60lft"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c7i1d"]
+_data = {
+&"RESET": SubResource("Animation_60lft"),
+&"new_animation": SubResource("Animation_cikvh")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_2gck5"]
+size = Vector3(0.025, 3.26, 0.03)
+
+[sub_resource type="Animation" id="Animation_2gck5"]
+resource_name = "rotate"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4666667, 2.7333333, 3.9, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.5235988, 0), Vector3(0, 0, 0), Vector3(0, -0.5235988, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_a85lo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cikvh"]
+_data = {
+&"RESET": SubResource("Animation_a85lo"),
+&"rotate": SubResource("Animation_2gck5")
+}
 
 [node name="main menu" type="Node3D"]
 script = ExtResource("1_4rqo4")
@@ -343,8 +423,9 @@ grow_vertical = 2
 text = "Game concept : Vera
 Organization : Vera/Cranile
 Coding : Gianspark/Cranile
-3D : Rodia Demarca/Cranile
-Music/SFX: GothMonkey"
+3D : Cranile/Rodia Demarca
+Music/SFX: GothMonkey
+Writing: Cranile"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
@@ -364,16 +445,31 @@ grow_vertical = 0
 text = "Close"
 
 [node name="Label" type="Label" parent="UI"]
+visible = false
 layout_mode = 0
 offset_left = 34.0
 offset_top = 30.0
-offset_right = 131.0
-offset_bottom = 53.0
-text = "GAME NAME"
+offset_right = 332.0
+offset_bottom = 95.0
+theme_override_font_sizes/font_size = 32
+text = "blood on the water"
 
 [node name="fade_system" parent="UI" instance=ExtResource("2_rwcdj")]
 visible = false
 layout_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+modulate = Color(0.9871544, 0.49551868, 0.99999994, 1)
+layout_mode = 0
+offset_right = 483.025
+offset_bottom = 139.0
+texture = ExtResource("3_2gck5")
+expand_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/TextureRect"]
+libraries = {
+&"": SubResource("AnimationLibrary_c7i1d")
+}
 
 [node name="hover_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_djnby")
@@ -393,6 +489,21 @@ bus = &"Ambience"
 
 [node name="scream_jam_all" parent="." instance=ExtResource("6_awsrp")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -48.59701, 0, -62.896534)
+
+[node name="hanged" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9762564, -2.2730632)
+pixel_size = 0.005
+texture = ExtResource("7_0sxhj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="hanged"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3110743, -0.056401253)
+mesh = SubResource("BoxMesh_2gck5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="hanged"]
+libraries = {
+&"": SubResource("AnimationLibrary_cikvh")
+}
+autoplay = "rotate"
 
 [connection signal="mouse_entered" from="UI/VBoxContainer/play" to="." method="on_hover_sound"]
 [connection signal="pressed" from="UI/VBoxContainer/play" to="." method="_on_play_pressed"]

@@ -5,7 +5,8 @@
 
 [sub_resource type="Resource" id="Resource_wh0bb"]
 script = ExtResource("1_0pc7q")
-content = "cd grab"
+content = "\"Ahí te vi entre las luces\"
+What a classic"
 metadata/_custom_type_script = "uid://jepaqxoulkry"
 
 [resource]

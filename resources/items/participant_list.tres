@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_j1r1y")
-name = "object_list"
+name = "participant_list"
 metadata/_custom_type_script = "uid://cbxuwoq6kloo8"

@@ -7,11 +7,16 @@ extends Node3D
 @onready var click_sound: AudioStreamPlayer = $click_sound
 @onready var fade_system: fade_screen_system = $UI/fade_system
 
+@onready var hanged: Sprite3D = $hanged
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	fade_system.force_set_screen_to_clear()
 	fade_system.fade_to_black_ended.connect(change_scene_to_cutscene)
-
+	if PlayerData.has_beaten_game:
+		hanged.visible = true
+	else:
+		hanged.visible = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

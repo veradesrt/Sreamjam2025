@@ -5,7 +5,8 @@
 
 [sub_resource type="Resource" id="Resource_nj34k"]
 script = ExtResource("1_vsph4")
-content = "Grab key"
+content = "A key.
+The faded tag says \"bathroom\""
 metadata/_custom_type_script = "uid://jepaqxoulkry"
 
 [resource]

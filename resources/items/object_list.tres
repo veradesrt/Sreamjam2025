@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_nu6ln")
-name = "mouse"
+name = "object_list"
 metadata/_custom_type_script = "uid://cbxuwoq6kloo8"
