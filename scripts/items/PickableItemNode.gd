@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var interactable_node: InteractableNode = $Components/InteractableNode
 
+signal item_grabbed_destroy()
 func _ready() -> void:
 	interactable_node.last_interact.connect(evaluate_interaction)
 
@@ -17,4 +18,5 @@ func evaluate_interaction():
 		print("conditional failed")
 
 func delete() -> void:
+	item_grabbed_destroy.emit()
 	queue_free()

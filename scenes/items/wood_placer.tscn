@@ -1,0 +1,58 @@
+[gd_scene load_steps=13 format=3 uid="uid://jt68a0y3uf8x"]
+
+[ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="1_n3l6b"]
+[ext_resource type="Script" uid="uid://jepaqxoulkry" path="res://scripts/dialogue/text/Text.gd" id="2_rkjli"]
+[ext_resource type="Script" uid="uid://d6yrcdl51eli" path="res://scripts/dialogue/dialogue/Dialogue.gd" id="3_ke5di"]
+[ext_resource type="Script" uid="uid://xawihoq8x6wx" path="res://scenes/items/check_for_item.gd" id="4_exhsh"]
+[ext_resource type="Resource" uid="uid://cxp6cqwe7w0b6" path="res://resources/items/wood_planks.tres" id="5_brx78"]
+[ext_resource type="Script" uid="uid://bwgbiu2cvnoiq" path="res://scenes/items/dialogue_changer.gd" id="6_brx78"]
+[ext_resource type="Script" uid="uid://d0fummst3efdb" path="res://scenes/items/event_listener.gd" id="7_co7hx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n3l6b"]
+
+[sub_resource type="Resource" id="Resource_exhsh"]
+script = ExtResource("2_rkjli")
+content = "You need to place a wooden plank to cross"
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_brx78"]
+script = ExtResource("3_ke5di")
+dialogue = Array[ExtResource("2_rkjli")]([SubResource("Resource_exhsh")])
+metadata/_custom_type_script = "uid://d6yrcdl51eli"
+
+[sub_resource type="Resource" id="Resource_co7hx"]
+script = ExtResource("2_rkjli")
+content = "now i can cross"
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_7rcy4"]
+script = ExtResource("3_ke5di")
+dialogue = Array[ExtResource("2_rkjli")]([SubResource("Resource_co7hx")])
+metadata/_custom_type_script = "uid://d6yrcdl51eli"
+
+[node name="wood_placer" instance=ExtResource("1_n3l6b")]
+
+[node name="InteractableNode" parent="Components" index="0" node_paths=PackedStringArray("interactable_conditional")]
+interactable_name = "Place plank"
+interactable_conditional = NodePath("../check_for_item")
+
+[node name="CollisionShape3D" parent="Components/InteractableNode" index="0"]
+shape = SubResource("BoxShape3D_n3l6b")
+
+[node name="DialogueEmitter3D" parent="Components" index="1"]
+dialogue = SubResource("Resource_brx78")
+
+[node name="check_for_item" type="Node3D" parent="Components" index="3"]
+script = ExtResource("4_exhsh")
+item_needed = ExtResource("5_brx78")
+
+[node name="dialogue_changer" type="Node3D" parent="Components" index="4" node_paths=PackedStringArray("dialogue_emiter")]
+script = ExtResource("6_brx78")
+new_dialogue = SubResource("Resource_7rcy4")
+dialogue_emiter = NodePath("../DialogueEmitter3D")
+
+[node name="item_grab_listener" type="Node3D" parent="Components" index="5"]
+script = ExtResource("7_co7hx")
+item_to_listen = "wood_planks"
+
+[connection signal="correct_item_grabbed" from="Components/item_grab_listener" to="Components/dialogue_changer" method="change_dialogue"]

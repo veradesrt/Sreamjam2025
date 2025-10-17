@@ -64,3 +64,7 @@ item_data = ExtResource("2_bgb47")
 [node name="knife" type="MeshInstance3D" parent="Components" index="3"]
 mesh = SubResource("ArrayMesh_rsxpc")
 skeleton = NodePath("")
+
+[node name="interactable_test" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12962583, 0, 0)
+pixel_size = 0.006

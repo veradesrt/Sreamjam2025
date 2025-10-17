@@ -22,7 +22,8 @@ func _enter_tree() -> void:
 	monitoring = false
 	switch(is_on)
 	
-	interactable_name = item_node.item_data.name
+	if item_node.item_data != null:
+		interactable_name = item_node.item_data.name
 
 func _first_interact() -> void:
 	first_interact.emit()

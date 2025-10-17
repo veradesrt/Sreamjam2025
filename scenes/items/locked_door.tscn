@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://3mhpfh66hkre"]
+[gd_scene load_steps=15 format=3 uid="uid://3mhpfh66hkre"]
 
 [ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="1_5qofn"]
 [ext_resource type="Resource" uid="uid://x206nk53yfsf" path="res://resources/items/locked_door.tres" id="2_62hvc"]
@@ -9,8 +9,10 @@
 [ext_resource type="Script" uid="uid://d0fummst3efdb" path="res://scenes/items/event_listener.gd" id="7_d1nuj"]
 [ext_resource type="Script" uid="uid://bwgbiu2cvnoiq" path="res://scenes/items/dialogue_changer.gd" id="8_s3jnx"]
 [ext_resource type="Resource" uid="uid://bhfxev5lkgsre" path="res://resources/dialogue/door_unlocked.tres" id="9_v5huw"]
+[ext_resource type="PackedScene" uid="uid://b47o7blkhu25i" path="res://assets/3D models/items/door.glb" id="10_xkwdu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dhqgl"]
+size = Vector3(0.625, 2.97, 1.86)
 
 [sub_resource type="Resource" id="Resource_s3jnx"]
 script = ExtResource("2_hqh78")
@@ -22,7 +24,8 @@ script = ExtResource("3_d1nuj")
 dialogue = Array[ExtResource("2_hqh78")]([SubResource("Resource_s3jnx")])
 metadata/_custom_type_script = "uid://d6yrcdl51eli"
 
-[sub_resource type="BoxMesh" id="BoxMesh_62hvc"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_xkwdu"]
+size = Vector3(0.39, 2.995, 1.67)
 
 [node name="locked_door" instance=ExtResource("1_5qofn")]
 
@@ -30,6 +33,7 @@ metadata/_custom_type_script = "uid://d6yrcdl51eli"
 interactable_conditional = NodePath("../../check_for_item")
 
 [node name="CollisionShape3D" parent="Components/InteractableNode" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47885132, 0)
 shape = SubResource("BoxShape3D_dhqgl")
 
 [node name="DialogueEmitter3D" parent="Components" index="1"]
@@ -37,9 +41,6 @@ dialogue = SubResource("Resource_v5huw")
 
 [node name="ItemNode" parent="Components" index="2"]
 item_data = ExtResource("2_62hvc")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Components" index="3"]
-mesh = SubResource("BoxMesh_62hvc")
 
 [node name="check_for_item" type="Node3D" parent="." index="2"]
 script = ExtResource("3_vmd8i")
@@ -53,5 +54,14 @@ item_to_listen = "key"
 script = ExtResource("8_s3jnx")
 new_dialogue = ExtResource("9_v5huw")
 dialogue_emiter = NodePath("../Components/DialogueEmitter3D")
+
+[node name="door" parent="." index="5" instance=ExtResource("10_xkwdu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.171803, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.51232177, 0)
+shape = SubResource("BoxShape3D_xkwdu")
 
 [connection signal="correct_item_grabbed" from="item_grab_listener" to="dialogue_changer" method="change_dialogue"]

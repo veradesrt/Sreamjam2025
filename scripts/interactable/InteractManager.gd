@@ -20,7 +20,7 @@ func interacted(i : InteractableNode) -> void:
 	
 	##esto no esta tan gucci pero si en algun momento hace falta se hace una queue y se saca todo esto
 	##TODO: hacer un mediador para el interactablenode
-	if(i.dialogue_emitter):
+	if(i.dialogue_emitter.dialogue):
 		i.dialogue_emitter.start_dialogue()
 		DialogueGlobalEmitter.has_ended.connect(end_dialog)
 		return
