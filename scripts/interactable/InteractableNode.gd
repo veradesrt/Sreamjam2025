@@ -8,6 +8,7 @@ extends Area3D
 @export var dialogue_emitter : DialogueEmitter3D
 @export var item_node : ItemNode
 @export var interactealbe_highlight: Sprite3D
+@export var interactable_conditional : Node3D
 
 signal first_interact()
 signal last_interact()
@@ -20,7 +21,8 @@ func _enter_tree() -> void:
 	interactealbe_highlight.visible = false
 	monitoring = false
 	switch(is_on)
-	print(monitoring)
+	
+	interactable_name = item_node.item_data.name
 
 func _first_interact() -> void:
 	first_interact.emit()
@@ -29,11 +31,11 @@ func _last_interact() -> void:
 	last_interact.emit()
 
 func _on_contact() -> void:
-	print("on_contact")
+	#print("on_contact")
 	on_contact.emit()
 
 func _out_of_contact() -> void:
-	print("out_of_contact")
+	#print("out_of_contact")
 	out_of_contact.emit()
 
 func switch(state : bool) -> void:

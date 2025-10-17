@@ -1,8 +1,12 @@
-[gd_scene load_steps=8 format=4 uid="uid://c8qgt2qbdpc28"]
+[gd_scene load_steps=10 format=4 uid="uid://c8qgt2qbdpc28"]
 
 [ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="1_vn8hb"]
+[ext_resource type="Resource" uid="uid://bva6076pwwbp5" path="res://resources/dialogue/cd.tres" id="2_2dpbt"]
 [ext_resource type="Resource" uid="uid://d2lics5skb84b" path="res://resources/items/cd.tres" id="2_tnffk"]
 [ext_resource type="Texture2D" uid="uid://5asjcbadtr8x" path="res://assets/3D models/items/scream_jam_items_lamaquinadehacerpajaros.webp" id="3_77p4i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_77p4i"]
+size = Vector3(0.74, 0.132, 0.715)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1mqb"]
 resource_name = "CD base"
@@ -72,6 +76,13 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_orpfr")
 
 [node name="cd" instance=ExtResource("1_vn8hb")]
+
+[node name="CollisionShape3D" parent="Components/InteractableNode" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.022033691, 0)
+shape = SubResource("BoxShape3D_77p4i")
+
+[node name="DialogueEmitter3D" parent="Components" index="1"]
+dialogue = ExtResource("2_2dpbt")
 
 [node name="ItemNode" parent="Components" index="2"]
 item_data = ExtResource("2_tnffk")

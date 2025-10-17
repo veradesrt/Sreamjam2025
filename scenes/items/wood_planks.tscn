@@ -1,9 +1,68 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvrfbkk0o61xh"]
+[gd_scene load_steps=9 format=4 uid="uid://cvrfbkk0o61xh"]
 
 [ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="1_fk41h"]
 [ext_resource type="Resource" uid="uid://cxp6cqwe7w0b6" path="res://resources/items/wood_planks.tres" id="2_68uct"]
+[ext_resource type="Resource" uid="uid://cylvbdvo15cd1" path="res://resources/dialogue/wood_planks.tres" id="2_iysuk"]
+[ext_resource type="Texture2D" uid="uid://df2n7g6051d7s" path="res://assets/3D models/allinone/scream_jam_all_logs195.jpg" id="3_u8mgx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iysuk"]
+size = Vector3(0.7, 2.046, 0.872)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uskj1"]
+resource_name = "wood"
+cull_mode = 2
+albedo_texture = ExtResource("3_u8mgx")
+roughness = 0.5
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_s2qjs"]
+_surfaces = [{
+"aabb": AABB(-0.3248096, -0.17115772, -0.23018318, 0.38768137, 2.0193532, 0.6756949),
+"format": 34896613377,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYACAAJAAoACAALAAkADAAKAAkACwAMAAkADQAIAAoACwAIAA0ADAAOAAoADQAKAA4ACwAPAAwACwANAA8ADwAOAAwADwANAA4A"),
+"name": "wood",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("+LgAAGquAAD4uIr9AAAAAPi4iv1qrgAA+LgAAAAAAAD984r9AAAAAP3zAABqrgAA/fOK/WquAAD98wAAAAAAAKc0CwT//wAAlZH//4pmAAA8xv//6PMAAAAACwShcgAAV8u6/r5hAABpbscCM/sAAP//uv4c7wAAwjnHAtVtAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_x2gd3"]
+resource_name = "scream_jam_all_Cube_021"
+_surfaces = [{
+"aabb": AABB(-0.3248096, -0.17115772, -0.23018318, 0.38768137, 2.0193532, 0.6756949),
+"attribute_data": PackedByteArray("yv54jJtG5PRfRlaS//9P5U6d///YsFTV2LD//06dVNVw/Tvl4kVJkxxGm/RD/GWNTp2qqtiw/3/YsKqqTp3/f8SJVNVOnaqqTp1U1cSJqqrYsFTVYsSqqmLEVNXYsKqqyv54jJtG5PRfRlaS//9P5U6d///YsFTV2LD//06dVNVw/Tvl4kVJkxxGm/RD/GWNTp2qqtiw/3/YsKqqTp3/f8SJVNVOnaqqTp1U1cSJqqrYsFTVYsSqqmLEVNXYsKqq"),
+"format": 34896613399,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0A"),
+"material": SubResource("StandardMaterial3D_uskj1"),
+"name": "wood",
+"primitive": 3,
+"uv_scale": Vector4(3.2753897, 1.5, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("+LgAAGquMdb4uIr9AAC+1fi4iv1qrqfV+LgAAAAASdb4uAAAAAD///3ziv0AAP//+LiK/QAA///98wAAAAD///3zAAAAABkr/fOK/Wquciv984r9AACEK/3zAABqrgcr/fMAAGqu/7/4uIr9aq7/v/3ziv1qrv+/+LgAAGqu/7/4uAAAAAD/v/3zAABqrv+//fMAAAAA/7/4uAAAaq7/v/3ziv0AAP//+LiK/Wqu///4uIr9AAD///3ziv1qrv//pzQLBP//F9SVkf//imag0zzG///o843TAAALBKFyKdQAAAsEoXIY/FfLuv6+YRj8lZH//4pmGPzCOccC1W0Y/MI5xwLVbTMj//+6/hzveiNXy7r+vmGFI2luxwIz+ygjaW7HAjP7r7s8xv//6POvu///uv4c76+7pzQLBP//r7sAAAsEoXKzv2luxwIz+7O/wjnHAtVts7+nNAsE//+zv1fLuv6+YRL/PMb//+jzEv+Vkf//imYS////uv4c7xL/0FShqRVVKqojVUaqw1SGqf+//7//v/+//7//v/+//79mqs5UL6pgVCSqSlRxquRU/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/SFuOqIFb/qiKWxCpP1t8qMjF5b7IxeW+yMXlvsjF5b5IqqtQDqpLUAWqPFBSqrpQ8Aj+B/AI/gfwCP4H8Aj+B0MQMH5DEDB+QxAwfkMQMH63h5y8t4ecvLeHnLy3h5y8")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_s2qjs")
 
 [node name="wood_planks" instance=ExtResource("1_fk41h")]
 
+[node name="InteractableNode" parent="Components" index="0"]
+is_on = false
+
+[node name="CollisionShape3D" parent="Components/InteractableNode" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.031677246, 0.064208984)
+shape = SubResource("BoxShape3D_iysuk")
+
+[node name="DialogueEmitter3D" parent="Components" index="1"]
+dialogue = ExtResource("2_iysuk")
+
 [node name="ItemNode" parent="Components" index="2"]
 item_data = ExtResource("2_68uct")
+
+[node name="wood_planks2" type="MeshInstance3D" parent="Components" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.88071895, 0)
+mesh = SubResource("ArrayMesh_x2gd3")
+skeleton = NodePath("")

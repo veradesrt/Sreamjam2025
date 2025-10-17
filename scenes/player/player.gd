@@ -29,6 +29,7 @@ func _ready() -> void:
 	change_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	mouse_sens = PlayerData.get_mouse_sensitivity()
 	PlayerData.mouse_sens_changed.connect(change_mouse_sens)
+	PlayerData.set_inv_ref(inventory_node)
 	
 	fade_system.force_set_screen_to_black()
 	fade_system.fade_from_black_to_clear()

@@ -1,9 +1,57 @@
-[gd_scene load_steps=3 format=3 uid="uid://3mhpfh66hkre"]
+[gd_scene load_steps=14 format=3 uid="uid://3mhpfh66hkre"]
 
 [ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="1_5qofn"]
 [ext_resource type="Resource" uid="uid://x206nk53yfsf" path="res://resources/items/locked_door.tres" id="2_62hvc"]
+[ext_resource type="Script" uid="uid://jepaqxoulkry" path="res://scripts/dialogue/text/Text.gd" id="2_hqh78"]
+[ext_resource type="Script" uid="uid://d6yrcdl51eli" path="res://scripts/dialogue/dialogue/Dialogue.gd" id="3_d1nuj"]
+[ext_resource type="Script" uid="uid://xawihoq8x6wx" path="res://scenes/items/check_for_item.gd" id="3_vmd8i"]
+[ext_resource type="Resource" uid="uid://o7c15c4u2yer" path="res://resources/items/key.tres" id="4_dhqgl"]
+[ext_resource type="Script" uid="uid://d0fummst3efdb" path="res://scenes/items/event_listener.gd" id="7_d1nuj"]
+[ext_resource type="Script" uid="uid://bwgbiu2cvnoiq" path="res://scenes/items/dialogue_changer.gd" id="8_s3jnx"]
+[ext_resource type="Resource" uid="uid://bhfxev5lkgsre" path="res://resources/dialogue/door_unlocked.tres" id="9_v5huw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dhqgl"]
+
+[sub_resource type="Resource" id="Resource_s3jnx"]
+script = ExtResource("2_hqh78")
+content = "door is locked, i need a key"
+metadata/_custom_type_script = "uid://jepaqxoulkry"
+
+[sub_resource type="Resource" id="Resource_v5huw"]
+script = ExtResource("3_d1nuj")
+dialogue = Array[ExtResource("2_hqh78")]([SubResource("Resource_s3jnx")])
+metadata/_custom_type_script = "uid://d6yrcdl51eli"
+
+[sub_resource type="BoxMesh" id="BoxMesh_62hvc"]
 
 [node name="locked_door" instance=ExtResource("1_5qofn")]
 
+[node name="InteractableNode" parent="Components" index="0" node_paths=PackedStringArray("interactable_conditional")]
+interactable_conditional = NodePath("../../check_for_item")
+
+[node name="CollisionShape3D" parent="Components/InteractableNode" index="0"]
+shape = SubResource("BoxShape3D_dhqgl")
+
+[node name="DialogueEmitter3D" parent="Components" index="1"]
+dialogue = SubResource("Resource_v5huw")
+
 [node name="ItemNode" parent="Components" index="2"]
 item_data = ExtResource("2_62hvc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Components" index="3"]
+mesh = SubResource("BoxMesh_62hvc")
+
+[node name="check_for_item" type="Node3D" parent="." index="2"]
+script = ExtResource("3_vmd8i")
+item_needed = ExtResource("4_dhqgl")
+
+[node name="item_grab_listener" type="Node3D" parent="." index="3"]
+script = ExtResource("7_d1nuj")
+item_to_listen = "key"
+
+[node name="dialogue_changer" type="Node3D" parent="." index="4" node_paths=PackedStringArray("dialogue_emiter")]
+script = ExtResource("8_s3jnx")
+new_dialogue = ExtResource("9_v5huw")
+dialogue_emiter = NodePath("../Components/DialogueEmitter3D")
+
+[connection signal="correct_item_grabbed" from="item_grab_listener" to="dialogue_changer" method="change_dialogue"]

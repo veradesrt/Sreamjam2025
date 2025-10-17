@@ -1,8 +1,12 @@
-[gd_scene load_steps=7 format=4 uid="uid://eqd6uw4ixlr8"]
+[gd_scene load_steps=9 format=4 uid="uid://eqd6uw4ixlr8"]
 
 [ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="1_3k7mx"]
+[ext_resource type="Resource" uid="uid://8jcqabijpb7v" path="res://resources/dialogue/book.tres" id="2_3e67c"]
 [ext_resource type="Resource" uid="uid://7rtab4gf22cr" path="res://resources/items/book.tres" id="2_k3vm4"]
 [ext_resource type="Texture2D" uid="uid://c7nufnccvkq5m" path="res://assets/3D models/items/scream_jam_items_martin_fierro_256.png" id="3_4l2gc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4l2gc"]
+size = Vector3(0.83, 0.159, 0.85)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bubsb"]
 resource_name = "martin_fierro"
@@ -44,6 +48,13 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_f3sjr")
 
 [node name="book" instance=ExtResource("1_3k7mx")]
+
+[node name="CollisionShape3D" parent="Components/InteractableNode" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.026489258, 0)
+shape = SubResource("BoxShape3D_4l2gc")
+
+[node name="DialogueEmitter3D" parent="Components" index="1"]
+dialogue = ExtResource("2_3e67c")
 
 [node name="ItemNode" parent="Components" index="2"]
 item_data = ExtResource("2_k3vm4")

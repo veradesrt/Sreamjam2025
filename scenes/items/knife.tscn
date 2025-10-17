@@ -1,8 +1,12 @@
-[gd_scene load_steps=7 format=4 uid="uid://d688iapjvmjv"]
+[gd_scene load_steps=9 format=4 uid="uid://d688iapjvmjv"]
 
 [ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="1_ivdxo"]
 [ext_resource type="Resource" uid="uid://dswtxucmgcif8" path="res://resources/items/knife.tres" id="2_bgb47"]
+[ext_resource type="Resource" uid="uid://ghrl0mhee6wo" path="res://resources/dialogue/knife.tres" id="2_rsxpc"]
 [ext_resource type="Texture2D" uid="uid://cpgfh6f2ucr5l" path="res://assets/3D models/items/scream_jam_items_tramontina_256.png" id="3_bgb47"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bgb47"]
+size = Vector3(0.68, 0.321, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7mdb"]
 resource_name = "tramontina"
@@ -46,6 +50,13 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_r11t6")
 
 [node name="knife" instance=ExtResource("1_ivdxo")]
+
+[node name="CollisionShape3D" parent="Components/InteractableNode" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.032348633, 0)
+shape = SubResource("BoxShape3D_bgb47")
+
+[node name="DialogueEmitter3D" parent="Components" index="1"]
+dialogue = ExtResource("2_rsxpc")
 
 [node name="ItemNode" parent="Components" index="2"]
 item_data = ExtResource("2_bgb47")

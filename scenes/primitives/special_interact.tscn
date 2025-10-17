@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfrriqy7jw2f8"]
+
+[ext_resource type="Script" uid="uid://cj2swumx35srf" path="res://scripts/non_item_interacteable.gd" id="1_if6b4"]
+
+[node name="special_interact" type="Node3D"]
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+script = ExtResource("1_if6b4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]

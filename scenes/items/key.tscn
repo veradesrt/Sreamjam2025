@@ -1,10 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://cddltd7h087ys"]
+[gd_scene load_steps=6 format=3 uid="uid://cddltd7h087ys"]
 
 [ext_resource type="PackedScene" uid="uid://degcaoi7fvmio" path="res://scenes/interactable/pickable_item_node_template.tscn" id="1_5cvtb"]
 [ext_resource type="Resource" uid="uid://o7c15c4u2yer" path="res://resources/items/key.tres" id="2_6kn5x"]
+[ext_resource type="Resource" uid="uid://cg656iqpmegyb" path="res://resources/dialogue/key.tres" id="2_88ujd"]
 [ext_resource type="PackedScene" uid="uid://ca3h7sx6rfakh" path="res://assets/3D models/items/scream_jam_key.glb" id="3_88ujd"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5cvtb"]
+size = Vector3(0.77349854, 0.5151367, 0.576416)
+
 [node name="key" instance=ExtResource("1_5cvtb")]
+
+[node name="CollisionShape3D" parent="Components/InteractableNode" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.017486572, -0.02368164, -0.008178711)
+shape = SubResource("BoxShape3D_5cvtb")
+
+[node name="DialogueEmitter3D" parent="Components" index="1"]
+dialogue = ExtResource("2_88ujd")
 
 [node name="ItemNode" parent="Components" index="2"]
 item_data = ExtResource("2_6kn5x")

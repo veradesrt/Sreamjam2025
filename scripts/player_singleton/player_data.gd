@@ -5,8 +5,14 @@ var mouse_sensitivity : float = 0.001
 var master_audio_db : float = 0
 var sfx_audio_db : float = 0
 
+var player_ref : Player
+var inventory_ref : InventoryNode
+
 signal mouse_sens_changed()
+
+
 func _ready() -> void:
+	
 	pass # Replace with function body.
 
 func _process(delta: float) -> void:
@@ -24,3 +30,8 @@ func set_master_audio(new_master_db:float)->void:
 
 func get_master_audio()->float:
 	return master_audio_db
+
+func set_inv_ref(inv:InventoryNode)->void:
+	inventory_ref = inv
+func get_inv_ref()->InventoryNode:
+	return inventory_ref
